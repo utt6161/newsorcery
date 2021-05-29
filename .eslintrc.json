@@ -1,0 +1,64 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "plugin:react/recommended"
+    ],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "react-hooks"
+    ],
+    "rules": {
+
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+
+        // Indent with 4 spaces
+        "indent": ["error", 4],
+
+        // Indent JSX with 4 spaces
+        "react/jsx-indent": ["error", 4],
+
+        // Indent props with 4 spaces
+        "react/jsx-indent-props": ["error", 4],
+
+        // to prevent shit in reducers
+        "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["state"] }],
+
+        // HOW ELSE AM I SUPPOSED TO DEBUG THIS SHIT SHOW, FFS
+        "no-console": 0,
+
+        // yeah, im gonna use const for every fucking prop that i have, sure
+        "react/destructuring-assignment": 0,
+
+        // i mean... i know what im doing, alright? at least i think so, which is already something
+        "react/prop-types": "off",
+
+        //im into double quotes, sorry
+        "quotes": 0,
+
+        // no need for now, i think
+        "guard-for-in": "off",
+
+        // same as previous
+        "no-restricted-syntax": "off",
+
+        // i love unused vars, what can i say, usually my whole project is one unused var, so what
+        "no-unused-vars": "off",
+
+        //i mean.. what if there is only one param?
+        "arrow-parens": "off",
+
+        // trailing comma? nope
+        "comma-dangle": "off"
+    }
+}

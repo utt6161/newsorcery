@@ -1,0 +1,242 @@
+/* @media (min-width: 34em) {
+    .card-columns {
+        -webkit-column-count: 1;
+        -moz-column-count: 1;
+        column-count: 1;
+    }
+}
+
+@media (min-width: 48em) {
+    .card-columns {
+        -webkit-column-count: 2;
+        -moz-column-count: 2;
+        column-count: 2;
+    }
+}
+
+@media (min-width: 62em) {
+    .card-columns {
+        -webkit-column-count: 3;
+        -moz-column-count: 3;
+        column-count: 3;
+    }
+}
+
+@media (min-width: 75em) {
+    .card-columns {
+        -webkit-column-count: 3;
+        -moz-column-count: 3;
+        column-count: 3;
+    }
+} */
+
+.go_up{
+    display: block;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    text-transform: uppercase;
+    text-decoration: none;
+    /*font-size: 4vw;*/
+    text-align: center;
+    /*line-height: 15vw;*/
+    border: #1f8afe 2px solid;
+    background-color: #1f8afe;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+.go_up:hover{
+    background-color: white;
+}
+
+.go_up:hover img{
+    filter: brightness(0) invert(39%) sepia(94%) saturate(1853%) hue-rotate(195deg) brightness(101%) contrast(99%);
+}
+
+.arrow_up_img{
+    width: 2rem;
+    height: 2.5rem;
+    margin-top: 0.6rem;
+
+}
+
+.boundary_div{
+    position: absolute;
+    margin-top: -95rem;
+    width: 100%;
+    z-index: 0;
+}
+
+.full_border{
+    border: #1f8afe 1px solid;
+}
+
+.custom_card{
+    max-width: 20rem;
+    margin: 0.5rem;
+}
+
+.card-img-size{
+    max-width: 20rem;
+    height: auto;
+    padding: 1rem;
+}
+
+.no_rounding{
+    border-radius: 0;
+}
+
+.sections::-webkit-scrollbar {
+    height: 0.5rem;               /* ширина scrollbar */
+}
+.sections::-webkit-scrollbar-thumb {
+    background-color: #5aa9ff;    /* цвет плашки */
+    border-radius: 0;       /* закругления плашки */
+    /*border: #1f8afe 4px solid;  !* padding вокруг плашки *!*/
+}
+
+.sections{
+    padding-bottom: 0.05rem;
+    /*scrollbar-width: thin;*/
+    /*scrollbar-color: #5aa9ff white;*/
+
+}
+
+.section_borders{
+    border-right: #1f8afe 1px solid;
+    border-left: #1f8afe 1px solid;
+}
+
+
+
+.colored_search{
+    border: #1f8afe 1px solid;
+}
+
+.scrollable_sections{
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.section_button{
+    padding: 0;
+    border-radius: 0;
+}
+
+.selected_button{
+    width: auto;
+    height: calc(1.5em + .75rem + 2px);
+    border-right: 0;
+}
+
+.selected_button:hover{
+    background-color: #dc3545 !important;
+}
+
+.selected_button:hover img{
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(172deg) brightness(103%) contrast(103%);
+}
+
+.cancel_image{
+
+    filter: invert(33%) sepia(78%) saturate(4183%) hue-rotate(201deg) brightness(105%) contrast(104%);
+}
+
+.selected_button_text{
+    /*min-width: 7rem;*/
+    display: inline-block;
+    margin-bottom: 0;
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+    padding-bottom: 0;
+    white-space: nowrap;;
+    /*margin-left: 0.25rem;*/
+    /*margin-right: 0.25rem;*/
+    line-height: calc(1.5em + .75rem + 2px);
+}
+
+.section_button_margin{
+    margin: 0.1rem
+}
+
+.section_button_scrollable{
+
+}
+
+.section_button_scrollable:first-child{
+    border-left: none;
+}
+
+.section_button_scrollable:last-child{
+    border-right: none;
+}
+
+.section_button_scrollable:not(:first-child){
+    margin-left: 0.25rem;
+}
+
+.section_text{
+    margin: 0.70rem;
+}
+
+.squared{
+    border-radius: 0;
+}
+
+.squared:hover{
+    border-radius: 0;
+}
+
+.expand_button{
+    width: 100%;
+    height: 1.5rem;
+    display: inline-block;
+    padding: 0;
+    border-radius: 0;
+}
+.expand_button_text{
+    margin: 0;
+}
+
+.brand{
+    font-family: "Granite";
+    font-size: 2rem!important;
+    color: #1f8afe!important;
+}
+
+.info_button{
+    border-radius: 0;
+    border: none;
+}
+
+.info_button img{
+    width: 1.5rem;
+    height: 1.5rem;
+    filter: invert(37%) sepia(94%) saturate(664%) hue-rotate(179deg) brightness(107%) contrast(111%);
+}
+.info_button:hover img{
+    width: 1.5rem;
+    height: 1.5rem;
+    filter: invert(93%) sepia(0%) saturate(7500%) hue-rotate(109deg) brightness(107%) contrast(107%);
+}
+
+.link_to_tg{
+    color: #9ec3ff
+}
+
+.link_to_tg:hover{
+    color: #74b2ff
+}
+
+@font-face {
+    font-family: "Blupurpl";
+    src: url("/fonts/Blupurpl-Aaq6.otf") format("opentype");
+    font-style: normal;
+}
+
+@font-face{
+    font-family: "Granite";
+    src: url("/fonts/Granite-Bgvl.ttf") format("truetype");
+    font-style: normal;
+}

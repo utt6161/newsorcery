@@ -8,8 +8,27 @@
     "start": "next start"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.5.1",
+    "@zeit/next-css": "^1.0.1",
+    "axios": "^0.21.1",
+    "bootstrap": "^4.6.0",
     "next": "10.2.2",
+    "prop-types": "^15.7.2",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-bootstrap": "^1.6.0",
+    "react-dom": "17.0.2",
+    "react-fast-compare": "^3.2.0",
+    "react-masonry-responsive": "^2.1.2",
+    "react-redux": "^7.2.4",
+    "redux": "^4.1.0",
+    "redux-devtools-extension": "^2.13.9"
+  },
+  "devDependencies": {
+    "eslint": "^7.27.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.23.3",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.23.2",
+    "eslint-plugin-react-hooks": "^4.2.0"
   }
 }
