@@ -217,7 +217,7 @@
 img[class="gu-image"]{
     max-width: 1000px;
     max-height: 1000px;
-    min-width: 20rem;
+    min-width: 5rem;
     width: 100%;
     height: auto;
 }

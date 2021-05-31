@@ -78,10 +78,10 @@ function MyApp({ Component, pageProps, appProps }) {
             <Head>
                 <title>NEWSorcery</title>
                 <meta name="description" content="Shmoll practice"/>
+                <script defer src="https://platform.twitter.com/widgets.js" charSet="utf-8"/>
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
                     integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
                     crossOrigin="anonymous"/>
-                <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"/>
             </Head>
             <Container>
                 <Navbar id="navbar" expand="lg" className="mt-5" variant="light" bg="light">
