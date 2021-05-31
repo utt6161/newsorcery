@@ -11,8 +11,7 @@ import {setSearchText} from "../store/searchSlice";
 import {setCurrentPage} from "../store/articlesSlice";
 import Sections from "../components/Sections";
 import axios from "axios";
-import {apiKEY} from "../store/crutial_data";
-
+import {apiKEY} from "../store/crucialData";
 
 export default function Article(props) {
 
@@ -43,7 +42,7 @@ export default function Article(props) {
             </Sections>
             <Row>
                 <Col>
-                    <div className="m-1 p-2 full_border" dangerouslySetInnerHTML={ contentToString() }/>
+                    <div className="m-1 p-2 full-border" dangerouslySetInnerHTML={ contentToString() }/>
                 </Col>
             </Row>
         </>

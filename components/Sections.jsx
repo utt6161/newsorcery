@@ -2,7 +2,7 @@ import {Row} from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {sectionsList} from '../store/crutial_data';
+import {sectionsList} from '../store/crucialData';
 import {selectSectionInfo, setSelected} from '../store/sectionSlice';
 import {restoreNewsState} from "../store/newsSlice";
 import {nanoid} from "@reduxjs/toolkit";
@@ -26,8 +26,8 @@ export default function Sections() {
     //     });
     // };
 
-    const defaultButton = ['section_button', 'section_button_scrollable'];
-    const defaultSection = ['sections', 'scrollable_sections', 'section_borders'];
+    const defaultButton = ['section-button', 'section-button-scrollable'];
+    const defaultSection = ['sections', 'scrollable-sections', 'section-borders'];
     const [buttonClasses, setButton] = useState(defaultButton);
     const [sectionClasses, setSection] = useState(defaultSection);
     // const [defaultWheel, setWheelEvent] = useState(true)
@@ -73,7 +73,7 @@ export default function Sections() {
     const onExpand = () => {
         let currentButton = buttonClasses;
         let currentSection = sectionClasses;
-        const forDelSection = ['scrollable_sections', 'section_borders'];
+        const forDelSection = ['scrollable-sections', 'section-borders'];
         currentSection = currentSection.filter((item) => !forDelSection.includes(item));
         // currentSection.push("d-flex-inline", "justify-content-around")
         setSection(currentSection);
@@ -81,8 +81,8 @@ export default function Sections() {
         // to prevent strange behavior of supposedly unscrollable expanded div
         // setWheelEvent(false)
         setExpanded(true);
-        currentButton = currentButton.filter((item) => item !== 'section_button_scrollable');
-        currentButton.push('section_button_margin');
+        currentButton = currentButton.filter((item) => item !== 'section-button-scrollable');
+        currentButton.push('section-button-margin');
         setButton(currentButton);
         console.log('onExpand fired');
     };
@@ -91,12 +91,12 @@ export default function Sections() {
     const onShrink = () => {
         let currentButton = buttonClasses;
         const currentSection = sectionClasses;
-        currentSection.push('scrollable_sections', 'section_borders');
+        currentSection.push('scrollable-sections', 'section-borders');
         setSection(currentSection);
         // setWheelEvent(true)
         setExpanded(false);
-        currentButton = currentButton.filter((item) => item !== 'section_button_margin');
-        currentButton.push('section_button_scrollable');
+        currentButton = currentButton.filter((item) => item !== 'section-button-margin');
+        currentButton.push('section-button-scrollable');
         setButton(currentButton);
         console.log('onShrink fired');
     };
@@ -111,7 +111,7 @@ export default function Sections() {
                         variant="primary"
                         className={buttonClasses.join(' ')}
                     >
-                        <p className="section_text">{Object.entries(sectionsList)[i][1]}</p>
+                        <p className="section-text">{Object.entries(sectionsList)[i][1]}</p>
                     </Button>,
                 );
             } else {
@@ -123,7 +123,7 @@ export default function Sections() {
                         className={buttonClasses.join(' ')}
                         onClick={restoringHandler}
                     >
-                        <p className="section_text">{Object.entries(sectionsList)[i][1]}</p>
+                        <p className="section-text">{Object.entries(sectionsList)[i][1]}</p>
                     </Button>)
             }
         } else {
@@ -135,7 +135,7 @@ export default function Sections() {
                     className={buttonClasses.join(' ')}
                     onClick={restoringHandler}
                 >
-                    <p className="section_text">{Object.entries(sectionsList)[i][1]}</p>
+                    <p className="section-text">{Object.entries(sectionsList)[i][1]}</p>
                 </Button>,
             );
         }
@@ -154,25 +154,25 @@ export default function Sections() {
             {!expanded
             && (
                 <Row>
-                    <div className="w-100 pt-1 section_borders"/>
+                    <div className="w-100 pt-1 section-borders"/>
                 </Row>
             )}
             <Row>
                 <Button
                     onClick={expandHandler}
-                    className="expand_button d-flex justify-content-between align-items-center"
+                    className="expand-button d-flex justify-content-between align-items-center"
                     variant="outline-primary"
                 >
                     {!expanded && (
                         <>
-                            <p className="ml-2 expand_button_text">⮮</p>
-                            <p className="mr-2 expand_button_text">⮯</p>
+                            <p className="ml-2 expand-button-text">⮮</p>
+                            <p className="mr-2 expand-button-text">⮯</p>
                         </>
                     )}
                     {expanded && (
                         <>
-                            <p className="ml-2 expand_button_text">⮬</p>
-                            <p className="mr-2 expand_button_text">⮭</p>
+                            <p className="ml-2 expand-button-text">⮬</p>
+                            <p className="mr-2 expand-button-text">⮭</p>
                         </>
                     )}
                 </Button>

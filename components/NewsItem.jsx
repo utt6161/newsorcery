@@ -1,6 +1,6 @@
 import React from 'react';
 import strip from "../utils/stripHtml";
-import {currentURL} from "../store/crutial_data";
+import {currentURL} from "../store/crucialData";
 
 
 class NewsItem extends React.Component {
@@ -40,9 +40,9 @@ class NewsItem extends React.Component {
         const itemURL = `${currentURL}/article?&id=${encodeURIComponent(this.props.data.id)}`
 
         return <a href={itemURL} style = {{ textDecoration: "none"}}>
-            <div className="card mb-3 no_rounding full_border custom_card">
-                <img className="card-img-top no_rounding card-img-size" src={this.props.data.fields.thumbnail}
-                    alt="Card image cap"/>
+            <div className="card mb-3 no-rounding full-border custom-card">
+                <img className="card-img-top no-rounding card-img-size" src={this.props.data.fields.thumbnail}
+                     alt="Card image cap"/>
                 <div className="card-body">
                     <h5 className="card-title">{strip(this.props.data.fields.headline)}</h5>
                     <p className="card-text">{`${strip(this.props.data.fields.trailText)}...`}</p>

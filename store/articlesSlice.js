@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice, current} from '@reduxjs/toolkit'
 import axios from "axios";
-import {newsAPI} from "./crutial_data";
+import {newsAPI} from "./crucialData";
 
 export const fetchArticles = createAsyncThunk(
     'users/fetchArticles',

@@ -4,7 +4,7 @@ import React from "react";
 import strip from "../utils/stripHtml";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import {currentURL} from "../store/crutial_data";
+import {currentURL} from "../store/crucialData";
 
 
 // <Card className = "w-100 full_border no_rounding m-2">
@@ -31,11 +31,11 @@ export function ArticlesItem(props) {
     return(
 
         <a href={itemURL} style = {{ textDecoration: "none"}}>
-            <div className="card full_border no_rounding m-2 p-2">
+            <div className="card full-border no-rounding m-2 p-2">
                 <div className="row">
                     <div className="col-md-4 my-auto">
                         <img src={props.data.fields.thumbnail}
-                            className="w-100 full_border"/>
+                            className="w-100 full-border"/>
                     </div>
                     <div className="col-md-8 px-3 d-flex">
                         <div className="my-auto">

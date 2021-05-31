@@ -4,7 +4,7 @@ import React, {
 } from 'react';
 import axios from 'axios';
 import {Masonry} from 'react-masonry-responsive';
-import {newsAPI} from '../store/crutial_data';
+import {newsAPI} from '../store/crucialData';
 import {
     selectIsFetching,
     setFetching,
@@ -18,9 +18,9 @@ import {
 } from '../store/newsSlice';
 import {selectSectionInfo, selectSectionSelected} from '../store/sectionSlice';
 import NewsItem from './NewsItem';
-import {useFetch} from '../custom_hooks/customHooks'
+import {useFetch} from '../customHooks/customHooks'
 import {fetchNews} from "../store/newsSlice";
-import {useInfiniteScroll, useLazyLoading} from "../custom_hooks/customHooks"
+import {useInfiniteScroll, useLazyLoading} from "../customHooks/customHooks"
 import {nanoid} from "@reduxjs/toolkit";
 // import InfiniteScroller from "./infinite_scroller"
 
@@ -225,7 +225,7 @@ export function News(props) {
                 gap={16}
                 minColumnWidth={254}
             />
-            <div id='page-bottom-boundary' className="boundary_div_news" ref={bottomBoundaryRef}/>
+            <div id='page-bottom-boundary' className="boundary-div-news" ref={bottomBoundaryRef}/>
         </>
     );
 }

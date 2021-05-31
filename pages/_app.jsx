@@ -12,7 +12,7 @@ import {restoreNewsState} from "../store/newsSlice";
 import {selectSectionInfo, selectSectionSelected, setSelected, setUnselected} from "../store/sectionSlice";
 import Button from "react-bootstrap/Button";
 import {selectSearchText, setSearchText} from "../store/searchSlice";
-import {currentURL, sectionsList} from "../store/crutial_data";
+import {currentURL, sectionsList} from "../store/crucialData";
 import {restoreArticlesState} from "../store/articlesSlice";
 
 
@@ -81,6 +81,7 @@ function MyApp({ Component, pageProps, appProps }) {
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
                     integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
                     crossOrigin="anonymous"/>
+                <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"/>
             </Head>
             <Container>
                 <Navbar id="navbar" expand="lg" className="mt-5" variant="light" bg="light">
@@ -92,7 +93,7 @@ function MyApp({ Component, pageProps, appProps }) {
                         </SectionButton>
                         }
                         <FormControl
-                            className="squared colored_search"
+                            className="squared colored-search"
                             as = "input"
                             placeholder="Search"
                             aria-label="Search"
@@ -107,8 +108,8 @@ function MyApp({ Component, pageProps, appProps }) {
 
                 <Component {...appProps} {...pageProps} />
                 <div className = "fixed-bottom">
-                    <a href="#" className="go_up">
-                        <img className="arrow_up_img" src="/arrow_up.png" alt="arrow up to top"/>
+                    <a href="#" className="go-up">
+                        <img className="arrow-up-img" src="/arrow_up.png" alt="arrow up to top"/>
                     </a>
                 </div>
             </Container>

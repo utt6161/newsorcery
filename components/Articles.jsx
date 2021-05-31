@@ -7,8 +7,8 @@ import {nanoid} from "@reduxjs/toolkit";
 import {ArticlesItem} from "./ArticlesItem";
 import {fetchArticles, incrementPage, selectCurrentPage} from "../store/articlesSlice";
 import ReactPaginate from 'react-paginate';
-import {useInfiniteScroll} from "../custom_hooks/customHooks";
-import {currentURL} from "../store/crutial_data";
+import {useInfiniteScroll} from "../customHooks/customHooks";
+import {currentURL} from "../store/crucialData";
 
 const checkIfEq = (left, right) => {
     return JSON.stringify(left) !== JSON.stringify(right)
@@ -115,7 +115,7 @@ export function Articles(props) {
     return (
         <>
             {toRender}
-            <div id='page-bottom-boundary' className="boundary_div_news" ref={bottomBoundaryRef}/>
+            <div id='page-bottom-boundary' className="boundary-div-news" ref={bottomBoundaryRef}/>
         </>
     );
 }

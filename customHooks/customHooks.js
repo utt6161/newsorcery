@@ -1,6 +1,6 @@
 import {useEffect, useCallback, useRef} from 'react';
 import axios from "axios";
-import {newsAPI} from "../store/crutial_data";
+import {newsAPI} from "../store/crucialData";
 import {setNewsData, initiateLoading, loadingErrored, incrementPage} from "../store/newsSlice";
 import {useDispatch} from "react-redux";
 
