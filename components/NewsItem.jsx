@@ -1,6 +1,6 @@
 import React from 'react';
 import strip from "../utils/stripHtml";
-
+import {currentURL} from "../store/crutial_data";
 
 
 class NewsItem extends React.Component {
@@ -37,19 +37,24 @@ class NewsItem extends React.Component {
         //     </Card.Body>
         // </Card>
 
-        return <div className="card mb-3 no_rounding full_border custom_card">
-            <img className="card-img-top no_rounding card-img-size" src={this.props.data.thumbnail} alt="Card image cap"/>
-            <div className="card-body">
-                <h5 className="card-title">{strip(this.props.data.headline)}</h5>
-                <p className="card-text">{`${strip(this.props.data.trailText)}...`}</p>
-                <p className="card-text">
-                    <small
-                    >
-                        {`last updated: ${new Date(this.props.data.lastModified).toLocaleString()}`}
-                    </small>
-                </p>
+        const itemURL = `${currentURL}/article?&id=${encodeURIComponent(this.props.data.id)}`
+
+        return <a href={itemURL} style = {{ textDecoration: "none"}}>
+            <div className="card mb-3 no_rounding full_border custom_card">
+                <img className="card-img-top no_rounding card-img-size" src={this.props.data.fields.thumbnail}
+                    alt="Card image cap"/>
+                <div className="card-body">
+                    <h5 className="card-title">{strip(this.props.data.fields.headline)}</h5>
+                    <p className="card-text">{`${strip(this.props.data.fields.trailText)}...`}</p>
+                    <p className="card-text">
+                        <small
+                        >
+                            {`last updated: ${new Date(this.props.data.fields.lastModified).toLocaleString()}`}
+                        </small>
+                    </p>
+                </div>
             </div>
-        </div>
+        </a>
 
         // <Card className="bg-dark text-white">
         //     <Card.Img src={props.data.thumbnail} alt="Card image" />
@@ -73,4 +78,5 @@ class NewsItem extends React.Component {
         // </Card>
     }
 }
+
 export default NewsItem

@@ -68,7 +68,7 @@ export function News(props) {
                 // if(i % 10 === 0) {
                 toRenderBuffer.push({
                     key: nanoid(),
-                    node: <NewsItem data={props.newsData[i].fields}/>
+                    node: <NewsItem data={props.newsData[i]}/>
                 });
                 // })
                 // } else {
@@ -79,6 +79,14 @@ export function News(props) {
                 // }
             }
             setToRender(toRenderBuffer)
+            if(toRenderBuffer.length === 0){
+                setToRender(
+                    <>
+                        <h1 style={{color: "#1f8afe"}} className="px-4 pt-4 text-center">Now that&apos;s really strange, something&apos;s broken</h1>
+                        <h5 style={{color: "#1f8afe"}} className="text-center">you shouldn&apos;t be here in a first place</h5>
+                    </>
+                )
+            }
         } else {
             skipNewsOnce.current = false;
         }

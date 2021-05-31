@@ -37,9 +37,9 @@ export default function Sections() {
 
     const currentPathName = useSelector(selectPathName)
     switch(currentPathName){
-    case "":
+    case "/":
         restoringHandler = (e)=> {
-            //well, right now we at the main page then
+            //well, right now we at the main page
             dispatch(restoreNewsState())
             dispatch(setSelected({
                 sectionId: Object.entries(sectionsList)[e.currentTarget.dataset.sectionid][0],
@@ -49,7 +49,7 @@ export default function Sections() {
         break;
     case "/search":
         restoringHandler = (e)=> {
-            //well, right now we at the main page then
+            //well, right now we at the search page
             dispatch(restoreArticlesState())
             dispatch(setSelected({
                 sectionId: Object.entries(sectionsList)[e.currentTarget.dataset.sectionid][0],
@@ -58,6 +58,15 @@ export default function Sections() {
         }
         break;
 
+    case "/article":
+        restoringHandler = (e)=> {
+            //well, right now we at the single article page
+            dispatch(setSelected({
+                sectionId: Object.entries(sectionsList)[e.currentTarget.dataset.sectionid][0],
+                sectionText: Object.entries(sectionsList)[e.currentTarget.dataset.sectionid][1],
+            }));
+        }
+        break;
     }
 
     // transform scrollable sections into full div

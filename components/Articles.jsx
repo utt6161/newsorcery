@@ -1,4 +1,4 @@
-import {connect,  useDispatch, useSelector} from 'react-redux';
+import {connect, useDispatch, useSelector} from 'react-redux';
 import React, {
     useEffect, useRef, useState
 } from 'react';
@@ -8,6 +8,7 @@ import {ArticlesItem} from "./ArticlesItem";
 import {fetchArticles, incrementPage, selectCurrentPage} from "../store/articlesSlice";
 import ReactPaginate from 'react-paginate';
 import {useInfiniteScroll} from "../custom_hooks/customHooks";
+import {currentURL} from "../store/crutial_data";
 
 const checkIfEq = (left, right) => {
     return JSON.stringify(left) !== JSON.stringify(right)
@@ -37,8 +38,16 @@ export function Articles(props) {
 
         for (let i in props.articlesData) {
             toRenderBuffer.push(
-                <ArticlesItem key = {nanoid()} data={props.articlesData[i].fields}/>
+                <ArticlesItem key={nanoid()} data={props.articlesData[i]}/>
             );
+        }
+        if (toRenderBuffer.length === 0) {
+            toRenderBuffer.push(
+                <>
+                    <h1 style={{color: "#1f8afe"}} className="px-4 pt-4 text-center">Couldn&apos;t find anything</h1>
+                    <h5 style={{color: "#1f8afe"}} className="text-center">try again, perhaps?</h5>
+                </>
+            )
         }
         setToRender(toRenderBuffer)
     },
@@ -63,7 +72,7 @@ export function Articles(props) {
     }, [props.currentPage, props.sectionInfo.sectionId])
 
     const paginationLinks = (pageIndex) => {
-        return `${location.origin}/search?&q=${props.query.q}${props.sectionSelected ?"&sectionId=" + props.sectionInfo.sectionId + "&sectionText=" + props.sectionInfo.sectionText : ""}"&page="${pageIndex}`
+        return `${currentURL}/search?&q=${props.query.q}${props.sectionSelected ? "&sectionId=" + props.sectionInfo.sectionId + "&sectionText=" + props.sectionInfo.sectionText : ""}"&page="${pageIndex}`
     }
 
     // const [boundaryDiv, setBoundaryDiv] = useState([])

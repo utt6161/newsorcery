@@ -24,4 +24,9 @@ export const sectionsList = {
     weather: "Weather",
     world: "World news",
 };
-export const newsAPI = "https://content.guardianapis.com/search?&api-key=7494be0e-6ed6-486e-b2ac-f84307bee564&page-size=12&show-fields=headline,thumbnail,trailText,lastModified";
+
+export const currentURL = "http://localhost:3000"
+
+export const apiKEY = process.env.API_KEY
+
+export const newsAPI = `https://content.guardianapis.com/search?${apiKEY ? "&api-key=" + apiKEY : ""}&page-size=12&show-fields=headline,thumbnail,trailText,lastModified`;

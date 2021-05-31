@@ -12,7 +12,7 @@ import {restoreNewsState} from "../store/newsSlice";
 import {selectSectionInfo, selectSectionSelected, setSelected, setUnselected} from "../store/sectionSlice";
 import Button from "react-bootstrap/Button";
 import {selectSearchText, setSearchText} from "../store/searchSlice";
-import {sectionsList} from "../store/crutial_data";
+import {currentURL, sectionsList} from "../store/crutial_data";
 import {restoreArticlesState} from "../store/articlesSlice";
 
 
@@ -30,13 +30,13 @@ function MyApp({ Component, pageProps, appProps }) {
 
     const onSearchHandler = (event) => {
         event.preventDefault()
-        window.location = `${location.origin}/search?&q=${search}${sectionSelected ? "&sectionId=" + sectionInfo.sectionId + "&sectionText=" + sectionInfo.sectionText : ""}`
+        window.location = `${currentURL}/search?&q=${search}${sectionSelected ? "&sectionId=" + sectionInfo.sectionId + "&sectionText=" + sectionInfo.sectionText : ""}`
     }
 
     let restoringHandler;
     const currentPathName = useSelector(selectPathName)
     switch(currentPathName){
-    case "":
+    case "/":
         restoringHandler = (e)=> {
             dispatch(restoreNewsState());
             dispatch(setUnselected())
@@ -49,6 +49,11 @@ function MyApp({ Component, pageProps, appProps }) {
         }
         break;
 
+    case "/article":
+        restoringHandler = (e) => {
+            dispatch(setUnselected())
+        }
+        break;
     }
 
 
@@ -79,7 +84,7 @@ function MyApp({ Component, pageProps, appProps }) {
             </Head>
             <Container>
                 <Navbar id="navbar" expand="lg" className="mt-5" variant="light" bg="light">
-                    <Navbar.Brand className="brand" href="#">NEWSorcery</Navbar.Brand>
+                    <Navbar.Brand className="brand" href={currentURL}>NEWSorcery</Navbar.Brand>
                     <Form className="d-flex w-100">
                         {sectionSelected &&
                         <SectionButton text={sectionInfo.sectionText} onClick={restoringHandler}>

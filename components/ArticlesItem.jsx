@@ -4,6 +4,7 @@ import React from "react";
 import strip from "../utils/stripHtml";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import {currentURL} from "../store/crutial_data";
 
 
 // <Card className = "w-100 full_border no_rounding m-2">
@@ -24,29 +25,30 @@ import Row from "react-bootstrap/Row";
 //     </Card.Body>
 // </Card>
 
-export function ArticlesItem(props) {
 
+export function ArticlesItem(props) {
+    const itemURL = `${currentURL}/article?&id=${encodeURIComponent(props.data.id)}`
     return(
 
-        <a>
+        <a href={itemURL} style = {{ textDecoration: "none"}}>
             <div className="card full_border no_rounding m-2 p-2">
                 <div className="row">
                     <div className="col-md-4 my-auto">
-                        <img src={props.data.thumbnail}
+                        <img src={props.data.fields.thumbnail}
                             className="w-100 full_border"/>
                     </div>
                     <div className="col-md-8 px-3 d-flex">
                         <div className="my-auto">
                             <Row>
                                 <div className="card-block px-3">
-                                    <h4 className="card-title">{strip(props.data.headline)}</h4>
-                                    <p className="card-text">{`${strip(props.data.trailText)}...`} </p>
+                                    <h4 className="card-title">{strip(props.data.fields.headline)}</h4>
+                                    <p className="card-text">{`${strip(props.data.fields.trailText)}...`} </p>
                                 </div>
                             </Row>
                             <Row>
                                 <small className = "px-3 pt-3"
                                 >
-                                    {`last updated: ${new Date(props.data.lastModified).toLocaleString()}`}
+                                    {`last updated: ${new Date(props.data.fields.lastModified).toLocaleString()}`}
                                 </small>
                             </Row>
                         </div>
