@@ -27,6 +27,6 @@ export const sectionsList = {
 
 export const currentURL = "http://localhost:3000"
 
-export const apiKEY = process.env.API_KEY
+export const apiKEY = process.env.NEXT_PUBLIC_API_KEY
 
 export const newsAPI = `https://content.guardianapis.com/search?${apiKEY ? "&api-key=" + apiKEY : ""}&page-size=12&show-fields=headline,thumbnail,trailText,lastModified`;
