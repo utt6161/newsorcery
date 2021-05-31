@@ -1,11 +1,11 @@
 import {createAsyncThunk, createSlice, current} from '@reduxjs/toolkit'
 import axios from "axios";
-import {searchNewsApi} from "./crutial_data";
+import {newsAPI} from "./crutial_data";
 
 export const fetchNews = createAsyncThunk(
     'users/fetchNews',
     async (paramObj, thunkAPI) => {
-        const response = await axios.get(`${searchNewsApi}&page=${paramObj.currentPage ? paramObj.currentPage : 1}${paramObj.sectionSelected ? `&section=${paramObj.sectionInfo.sectionId}` : ''}`)
+        const response = await axios.get(`${newsAPI}&page=${paramObj.currentPage ? paramObj.currentPage : 1}${paramObj.sectionSelected ? `&section=${paramObj.sectionInfo.sectionId}` : ''}`)
         return response.data.response.results
     })
 

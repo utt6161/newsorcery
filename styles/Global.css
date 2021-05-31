@@ -61,7 +61,23 @@
 
 }
 
-.boundary_div{
+.card{
+    transition: 0.2s ease-out;
+}
+
+.card:hover {
+    background-color: #1f8afe;
+    color: white !important;
+}
+
+.boundary_div_articles{
+    position: absolute;
+    margin-top: -45rem;
+    width: 100%;
+    z-index: 0;
+}
+
+.boundary_div_news{
     position: absolute;
     margin-top: -95rem;
     width: 100%;

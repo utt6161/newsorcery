@@ -2,12 +2,16 @@ import {combineReducers, configureStore} from '@reduxjs/toolkit'
 import sectionReducer from "./sectionSlice"
 import newsReducer from "./newsSlice"
 import serverReducer from "./serverSlice"
+import searchReducer from "./searchSlice"
+import articlesReducer from "./articlesSlice"
 import {createWrapper} from "next-redux-wrapper";
 
 const rootReducer = combineReducers({
     server: serverReducer,
     section: sectionReducer,
-    news: newsReducer
+    news: newsReducer,
+    search: searchReducer,
+    articles: articlesReducer
 })
 
 export const makeStore = () => {

@@ -1,9 +1,7 @@
 import React from 'react';
+import strip from "../utils/stripHtml";
 
-function strip(html) {
-    const text = new DOMParser().parseFromString(html, 'text/html');
-    return text.body.textContent || '';
-}
+
 
 class NewsItem extends React.Component {
 
@@ -46,7 +44,6 @@ class NewsItem extends React.Component {
                 <p className="card-text">{`${strip(this.props.data.trailText)}...`}</p>
                 <p className="card-text">
                     <small
-                        className="text-muted"
                     >
                         {`last updated: ${new Date(this.props.data.lastModified).toLocaleString()}`}
                     </small>

@@ -6,9 +6,12 @@ import {sectionsList} from '../store/crutial_data';
 import {selectSectionInfo, setSelected} from '../store/sectionSlice';
 import {restoreNewsState} from "../store/newsSlice";
 import {nanoid} from "@reduxjs/toolkit";
+import {selectPathName} from "../store/serverSlice";
+import {restoreArticlesState} from "../store/articlesSlice";
 
 export default function Sections() {
     const sectionInfo = useSelector(selectSectionInfo);
+
     const dispatch = useDispatch();
 
     // onWheel event handler to provide horizontal scroll with mouse
@@ -29,6 +32,33 @@ export default function Sections() {
     const [sectionClasses, setSection] = useState(defaultSection);
     // const [defaultWheel, setWheelEvent] = useState(true)
     const [expanded, setExpanded] = useState(false);
+
+    let restoringHandler;
+
+    const currentPathName = useSelector(selectPathName)
+    switch(currentPathName){
+    case "":
+        restoringHandler = (e)=> {
+            //well, right now we at the main page then
+            dispatch(restoreNewsState())
+            dispatch(setSelected({
+                sectionId: Object.entries(sectionsList)[e.currentTarget.dataset.sectionid][0],
+                sectionText: Object.entries(sectionsList)[e.currentTarget.dataset.sectionid][1],
+            }));
+        }
+        break;
+    case "/search":
+        restoringHandler = (e)=> {
+            //well, right now we at the main page then
+            dispatch(restoreArticlesState())
+            dispatch(setSelected({
+                sectionId: Object.entries(sectionsList)[e.currentTarget.dataset.sectionid][0],
+                sectionText: Object.entries(sectionsList)[e.currentTarget.dataset.sectionid][1],
+            }));
+        }
+        break;
+
+    }
 
     // transform scrollable sections into full div
     const onExpand = () => {
@@ -78,16 +108,11 @@ export default function Sections() {
             } else {
                 buttons.push(
                     <Button
+                        data-sectionid = {i}
                         key={nanoid()}
                         variant="outline-primary"
                         className={buttonClasses.join(' ')}
-                        onClick={() => {
-                            dispatch(restoreNewsState())
-                            dispatch(setSelected({
-                                sectionId: Object.entries(sectionsList)[i][0],
-                                sectionText: Object.entries(sectionsList)[i][1],
-                            }));
-                        }}
+                        onClick={restoringHandler}
                     >
                         <p className="section_text">{Object.entries(sectionsList)[i][1]}</p>
                     </Button>)
@@ -95,16 +120,11 @@ export default function Sections() {
         } else {
             buttons.push(
                 <Button
+                    data-sectionid = {i}
                     key={nanoid()}
                     variant="outline-primary"
                     className={buttonClasses.join(' ')}
-                    onClick={() => {
-                        dispatch(restoreNewsState())
-                        dispatch(setSelected({
-                            sectionId: Object.entries(sectionsList)[i][0],
-                            sectionText: Object.entries(sectionsList)[i][1],
-                        }));
-                    }}
+                    onClick={restoringHandler}
                 >
                     <p className="section_text">{Object.entries(sectionsList)[i][1]}</p>
                 </Button>,

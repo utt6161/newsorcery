@@ -1,6 +1,6 @@
 import {useEffect, useCallback, useRef} from 'react';
 import axios from "axios";
-import {searchNewsApi} from "../store/crutial_data";
+import {newsAPI} from "../store/crutial_data";
 import {setNewsData, initiateLoading, loadingErrored, incrementPage} from "../store/newsSlice";
 import {useDispatch} from "react-redux";
 
@@ -22,20 +22,15 @@ import {useDispatch} from "react-redux";
 // }
 
 // infinite scrolling with intersection observer
-export const useInfiniteScroll = (scrollRef, dispatch) => {
-    // const options = {
-    //     root: null, // basically window
-    //     rootMargin: '0px',
-    //     thre
-    //
-    // }
+export const useInfiniteScroll = (scrollRef, dispatch, reducer) => {
+
     const scrollObserver = useCallback(
         node => {
             new IntersectionObserver(entries => {
                 entries.forEach(en => {
                     if (en.intersectionRatio > 0) {
                         console.log("HERE SHOULD BE A DISPATCH FOR INCREMENTING THE PAGE BROO")
-                        dispatch(incrementPage());
+                        dispatch(reducer());
                     }
                 });
             }, ).observe(node);

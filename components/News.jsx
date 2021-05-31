@@ -4,7 +4,7 @@ import React, {
 } from 'react';
 import axios from 'axios';
 import {Masonry} from 'react-masonry-responsive';
-import {searchNewsApi} from '../store/crutial_data';
+import {newsAPI} from '../store/crutial_data';
 import {
     selectIsFetching,
     setFetching,
@@ -17,7 +17,7 @@ import {
     restoreNewsState, selectNewsData, selectCurrentPage, setNewsData,
 } from '../store/newsSlice';
 import {selectSectionInfo, selectSectionSelected} from '../store/sectionSlice';
-import NewsItem from './news_item';
+import NewsItem from './NewsItem';
 import {useFetch} from '../custom_hooks/customHooks'
 import {fetchNews} from "../store/newsSlice";
 import {useInfiniteScroll, useLazyLoading} from "../custom_hooks/customHooks"
@@ -34,7 +34,8 @@ const mapStateToProps = state => {
         newsData: state.news.newsData,
         currentPage: state.news.currentPage,
         sectionSelected: state.section.sectionSelected,
-        sectionInfo: state.section.sectionInfo
+        sectionInfo: state.section.sectionInfo,
+        searchText: state.search.searchText
     }
 }
 
@@ -55,7 +56,7 @@ export function News(props) {
     const skipSectionOnce = useRef(true)
     let bottomBoundaryRef = useRef(null)
 
-    useInfiniteScroll(bottomBoundaryRef, dispatch)
+    useInfiniteScroll(bottomBoundaryRef, dispatch, incrementPage)
     // useLazyLoading(".card-img-top", )
 
     useEffect(() => {
@@ -88,8 +89,8 @@ export function News(props) {
     useEffect(() => {
         console.log("fetching news")
         dispatch(fetchNews({
-            currentPage: props.currentPage ? props.currentPage : 1,
-            sectionSelected: props.sectionSelected ? props.sectionSelected : false,
+            currentPage: props.currentPage ?? 1,
+            sectionSelected: props.sectionSelected ?? false,
             sectionInfo: {
                 sectionId: props.sectionInfo ? props.sectionInfo.sectionId : ""
             }
@@ -216,7 +217,7 @@ export function News(props) {
                 gap={16}
                 minColumnWidth={254}
             />
-            <div id='page-bottom-boundary' className="boundary_div" ref={bottomBoundaryRef}/>
+            <div id='page-bottom-boundary' className="boundary_div_news" ref={bottomBoundaryRef}/>
         </>
     );
 }
