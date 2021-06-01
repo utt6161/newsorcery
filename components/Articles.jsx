@@ -5,10 +5,12 @@ import React, {
 
 import {nanoid} from "@reduxjs/toolkit";
 import {ArticlesItem} from "./ArticlesItem";
-import {fetchArticles, incrementPage, selectCurrentPage} from "../store/articlesSlice";
+import {fetchArticles, incrementPage, restoreArticlesState, selectCurrentPage} from "../store/articlesSlice";
 import ReactPaginate from 'react-paginate';
 import {useInfiniteScroll} from "../customHooks/customHooks";
 import {currentURL} from "../store/crucialData";
+import {restoreNewsState} from "../store/newsSlice";
+import {setServerStateClear} from "../store/serverSlice";
 
 const checkIfEq = (left, right) => {
     return JSON.stringify(left) !== JSON.stringify(right)
@@ -22,6 +24,7 @@ const mapStateToProps = state => {
         totalPages: state.articles.totalPages,
         sectionSelected: state.section.sectionSelected,
         sectionInfo: state.section.sectionInfo,
+        searchText: state.search.searchText,
         query: state.server.query
     }
 }
@@ -31,6 +34,50 @@ export function Articles(props) {
     console.log('Articles are rerendered');
     const dispatch = useDispatch();
     const [toRender, setToRender] = useState([])
+    // console.log("urlSectionId: " + props.query.sectionId)
+    // console.log("query.q: " + props.query.q)
+    // const skippedFirstFecth = useRef(false)
+    useEffect(() => {
+        console.log("fetching news")
+        let sectionIdToFetch
+        if (props.sectionSelected || props.query.sectionId){
+            // check for undefined might be redundant, but anyway, cant be too careful
+            if (props.sectionInfo.sectionId !== "" && props.sectionInfo.sectionId !== undefined){
+                sectionIdToFetch = props.sectionInfo.sectionId
+            } else {
+                sectionIdToFetch = props.query.sectionId
+            }
+        }
+        let searchTextToFetch
+        if (props.searchText || props.query.q){
+            // check for undefined might be redundant, but anyway, cant be too careful
+            if(props.searchText !== "" && props.searchText !== undefined){
+                searchTextToFetch = props.searchText
+            } else {
+                searchTextToFetch = props.query.q
+            }
+        }
+        // if(skippedFirstFecth.current) {
+        console.log("params for a fetch. searchText: " + searchTextToFetch + " , sectionId: " + sectionIdToFetch)
+        dispatch(fetchArticles({
+            currentPage: props.currentPage ?? 1,
+            sectionSelected: props.sectionSelected ?? false,
+            // a wierd way to make initial fetching with sections work
+            sectionInfo: {
+                sectionId: sectionIdToFetch
+            },
+            searchText: searchTextToFetch
+        }))
+        dispatch(setServerStateClear())
+        // } else {
+        //     skippedFirstFecth.current = false
+        // }
+        // console.log(props.query)
+    }, [dispatch, props.currentPage, props.sectionInfo.sectionId])
+
+    // useEffect(()=>{
+    //     dispatch(restoreArticlesState())
+    // },[props.sectionInfo])
 
     useEffect(() => {
         let toRenderBuffer = []
@@ -38,15 +85,15 @@ export function Articles(props) {
 
         for (let i in props.articlesData) {
             toRenderBuffer.push(
-                <ArticlesItem key={nanoid()} data={props.articlesData[i]}/>
+                <ArticlesItem key={props.articlesData[i].id} data={props.articlesData[i]}/>
             );
         }
-        if (toRenderBuffer.length === 0) {
+        if (props.totalPages !== undefined && props.totalPages === 0) {
             toRenderBuffer.push(
-                <>
+                <div key = {nanoid()}>
                     <h1 style={{color: "#1f8afe"}} className="px-4 pt-4 text-center">Couldn&apos;t find anything</h1>
                     <h5 style={{color: "#1f8afe"}} className="text-center">try again, perhaps?</h5>
-                </>
+                </div>
             )
         }
         setToRender(toRenderBuffer)
@@ -58,18 +105,7 @@ export function Articles(props) {
 
 
     // fetchArticles is an asyncThunk, check articlesSlice
-    useEffect(() => {
-        console.log("fetching news")
-        dispatch(fetchArticles({
-            currentPage: props.currentPage ?? 1,
-            sectionSelected: props.sectionSelected ?? false,
-            sectionInfo: {
-                sectionId: props.sectionSelected ? props.sectionInfo.sectionId : ""
-            },
-            searchText: props.query.q ?? undefined
-        }))
-        // console.log(props.query)
-    }, [props.currentPage, props.sectionInfo.sectionId])
+
 
     const paginationLinks = (pageIndex) => {
         return `${currentURL}/search?&q=${props.query.q}${props.sectionSelected ? "&sectionId=" + props.sectionInfo.sectionId + "&sectionText=" + props.sectionInfo.sectionText : ""}"&page="${pageIndex}`

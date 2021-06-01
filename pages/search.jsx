@@ -6,7 +6,7 @@ import {selectQuery, setPathAndQuery} from "../store/serverSlice";
 import {setSelected} from "../store/sectionSlice";
 import {setSearchText} from "../store/searchSlice";
 import ArticlesList from "../components/Articles";
-import {setCurrentPage} from "../store/articlesSlice";
+import {setCurrentPage, restoreArticlesState} from "../store/articlesSlice";
 
 export default function Search(){
 
@@ -16,17 +16,28 @@ export default function Search(){
     useEffect(()=>{
         if(setSectionAndSearch.current) {
             if (query.hasOwnProperty("sectionId") && query.hasOwnProperty("sectionText")) {
+                console.log("dispatched the section info from query")
                 dispatch(setSelected({
                     sectionId: query.sectionId,
                     sectionText: query.sectionText,
                 }));
             }
+            console.log("searchjs, query.q = " + query.q)
             if(query.hasOwnProperty("q")){
-                dispatch(setSearchText(query.q))
+                // IN CASE IF A QUERY PARAM IS EMPTY (like someurl.com?&q= ) THE QUERY GETS A STRING "undefined"
+                // LIKE HOW AND WHY???
+                if(query.q === "undefined" || query.q === "" || query.q === undefined){
+                    console.log("setting search text to blank")
+                    dispatch(setSearchText(""))
+                } else {
+                    console.log("setting search text to data from query")
+                    dispatch(setSearchText(query.q))
+                }
+
             }
-            if(query.hasOwnProperty("page")){
-                dispatch(setCurrentPage(query.page))
-            }
+            // if(query.hasOwnProperty("page")){
+            //     dispatch(setCurrentPage(query.page ?? 1))
+            // }
             setSectionAndSearch.current = false
         }
     })

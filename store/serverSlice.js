@@ -17,6 +17,10 @@ const serverSlice = createSlice({
         // setQuery(state, action) {
         //     state.query = action.payload.query ?? state.query;
         // }
+        setServerStateClear(state){
+            state.pathName = ""
+            state.query = {}
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(
@@ -32,4 +36,4 @@ export const selectQuery = state => state.server.query
 export const selectPathName = state => state.server.pathName
 export default serverSlice.reducer;
 export {HYDRATE};
-export const {setPathAndQuery, setQuery, setPath} = serverSlice.actions;
+export const {setPathAndQuery, setQuery, setPath, setServerStateClear} = serverSlice.actions;

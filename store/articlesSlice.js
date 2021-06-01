@@ -5,7 +5,9 @@ import {newsAPI} from "./crucialData";
 export const fetchArticles = createAsyncThunk(
     'users/fetchArticles',
     async (paramObj, thunkAPI) => {
-        const response = await axios.get(`${newsAPI}${paramObj.searchText ? ("&q=" + paramObj.searchText) : ""}&page=${paramObj.currentPage ? paramObj.currentPage : 1}${paramObj.sectionSelected ? `&section=${paramObj.sectionInfo.sectionId}` : ''}`)
+        const assebledURL = `${newsAPI}${paramObj.searchText && paramObj.searchText !== "undefined" ? ("&q=" + paramObj.searchText) : ""}&page=${paramObj.currentPage ? paramObj.currentPage : 1}${paramObj.sectionInfo.sectionId ? `&section=${paramObj.sectionInfo.sectionId}` : ''}`
+        console.log(assebledURL)
+        const response = await axios.get(assebledURL)
         return response.data.response
     })
 
@@ -16,7 +18,6 @@ export const articlesSlice = createSlice({
         isFetching: false,
         articlesData: [],
         currentPage: 1,
-        totalPages: 0
     },
     reducers: {
 
@@ -34,9 +35,10 @@ export const articlesSlice = createSlice({
         },
 
         restoreArticlesState: state => {
+            console.log("restoring articles state")
             state.currentPage = 1
             state.articlesData = []
-            state.totalPages = 0
+            state.totalPages = undefined
         },
 
     },

@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const sectionSlice = createSlice({
     name: 'section',
     initialState: {
-        sectionSelected: false,
+        // sectionSelected: false,
         sectionInfo: {
             sectionId: "",
             sectionText: ""

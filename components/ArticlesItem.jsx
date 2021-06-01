@@ -28,6 +28,8 @@ import {currentURL} from "../store/crucialData";
 
 export function ArticlesItem(props) {
     const itemURL = `${currentURL}/article?&id=${encodeURIComponent(props.data.id)}`
+
+
     return(
 
         <a href={itemURL} style = {{ textDecoration: "none"}}>

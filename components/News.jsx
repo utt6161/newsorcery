@@ -22,6 +22,7 @@ import {useFetch} from '../customHooks/customHooks'
 import {fetchNews} from "../store/newsSlice";
 import {useInfiniteScroll, useLazyLoading} from "../customHooks/customHooks"
 import {nanoid} from "@reduxjs/toolkit";
+import {restoreArticlesState} from "../store/articlesSlice";
 // import InfiniteScroller from "./infinite_scroller"
 
 const checkIfEq = (left, right) => {
@@ -58,6 +59,11 @@ export function News(props) {
 
     useInfiniteScroll(bottomBoundaryRef, dispatch, incrementPage)
     // useLazyLoading(".card-img-top", )
+
+    // useEffect(()=>{
+    //     dispatch(restoreNewsState())
+    // },[props.sectionInfo])
+
 
     useEffect(() => {
         if (!skipNewsOnce.current) {

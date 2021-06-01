@@ -8,6 +8,7 @@ import {restoreNewsState} from "../store/newsSlice";
 import {nanoid} from "@reduxjs/toolkit";
 import {selectPathName} from "../store/serverSlice";
 import {restoreArticlesState} from "../store/articlesSlice";
+import {selectCurrentPath} from "../store/searchSlice";
 
 export default function Sections() {
     const sectionInfo = useSelector(selectSectionInfo);
@@ -35,11 +36,16 @@ export default function Sections() {
 
     let restoringHandler;
 
-    const currentPathName = useSelector(selectPathName)
-    switch(currentPathName){
+    const serverSidePathName = useSelector(selectPathName) // for a server's info, servers will be null after first render of arcticles
+    const clientSidePathName = useSelector(selectCurrentPath) // for a clients' info
+    console.log("serverSidePathName(sections): " + serverSidePathName)
+    console.log("clientSidePathName(sections): " + clientSidePathName)
+    let pathName = clientSidePathName !== "" && clientSidePathName!== undefined ? clientSidePathName : serverSidePathName
+    switch(pathName){
     case "/":
         restoringHandler = (e)=> {
             //well, right now we at the main page
+            console.log("switched section")
             dispatch(restoreNewsState())
             dispatch(setSelected({
                 sectionId: Object.entries(sectionsList)[e.currentTarget.dataset.sectionid][0],
@@ -50,6 +56,7 @@ export default function Sections() {
     case "/search":
         restoringHandler = (e)=> {
             //well, right now we at the search page
+            console.log("switched section")
             dispatch(restoreArticlesState())
             dispatch(setSelected({
                 sectionId: Object.entries(sectionsList)[e.currentTarget.dataset.sectionid][0],
@@ -61,6 +68,7 @@ export default function Sections() {
     case "/article":
         restoringHandler = (e)=> {
             //well, right now we at the single article page
+            console.log("switched section")
             dispatch(setSelected({
                 sectionId: Object.entries(sectionsList)[e.currentTarget.dataset.sectionid][0],
                 sectionText: Object.entries(sectionsList)[e.currentTarget.dataset.sectionid][1],
