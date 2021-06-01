@@ -16,21 +16,21 @@ export default function Search(){
     useEffect(()=>{
         if(setSectionAndSearch.current) {
             if (query.hasOwnProperty("sectionId") && query.hasOwnProperty("sectionText")) {
-                console.log("dispatched the section info from query")
+                //console.log("dispatched the section info from query")
                 dispatch(setSelected({
-                    sectionId: query.sectionId,
-                    sectionText: query.sectionText,
+                    sectionId: ((query.sectionId !== "undefined") && (query.sectionId !== undefined)) ? query.sectionId : "",
+                    sectionText: ((query.sectionText !== "undefined") && (query.sectionText !== undefined))  ? query.sectionText: "",
                 }));
             }
-            console.log("searchjs, query.q = " + query.q)
+            //console.log("searchjs, query.q = " + query.q)
             if(query.hasOwnProperty("q")){
                 // IN CASE IF A QUERY PARAM IS EMPTY (like someurl.com?&q= ) THE QUERY GETS A STRING "undefined"
-                // LIKE HOW AND WHY???
+                // i mean.. i get (partially) why its like that.. but still
                 if(query.q === "undefined" || query.q === "" || query.q === undefined){
-                    console.log("setting search text to blank")
+                    //console.log("setting search text to blank")
                     dispatch(setSearchText(""))
                 } else {
-                    console.log("setting search text to data from query")
+                    //console.log("setting search text to data from query")
                     dispatch(setSearchText(query.q))
                 }
 

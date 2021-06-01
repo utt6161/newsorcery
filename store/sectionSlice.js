@@ -11,10 +11,12 @@ export const sectionSlice = createSlice({
     },
     reducers: {
         setSelected: (state, action) => {
-            state.sectionSelected = true;
-            state.sectionInfo = action.payload;
-            console.log(action.payload);
-            console.log('setSelected fired');
+            if(action.payload.sectionId !== "" && action.payload.sectionText !== "") {
+                state.sectionSelected = true;
+                state.sectionInfo = action.payload;
+            }
+            //console.log(action.payload);
+            //console.log('setSelected fired');
         },
         setUnselected: (state) => {
             state.sectionSelected = false;

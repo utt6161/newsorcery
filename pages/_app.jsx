@@ -26,8 +26,8 @@ function MyApp({ Component, pageProps, appProps }) {
     const search = useSelector(selectSearchText)
     const serverSidePathName = useSelector(selectPathName) // for a server's info, servers will be null after first render of arcticles
     const clientSidePathName = useSelector(selectCurrentPath) // for a clients' info
-    console.log("serverSidePathName(_appjs): " + serverSidePathName)
-    console.log("clientSidePathName(_appjs): " + clientSidePathName)
+    //console.log("serverSidePathName(_appjs): " + serverSidePathName)
+    //console.log("clientSidePathName(_appjs): " + clientSidePathName)
     const sectionSelected = useSelector(selectSectionSelected)
     const sectionInfo = useSelector(selectSectionInfo)
     const setSearchInfo = useRef(true)

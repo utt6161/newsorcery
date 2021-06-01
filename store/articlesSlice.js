@@ -6,7 +6,7 @@ export const fetchArticles = createAsyncThunk(
     'users/fetchArticles',
     async (paramObj, thunkAPI) => {
         const assebledURL = `${newsAPI}${paramObj.searchText && paramObj.searchText !== "undefined" ? ("&q=" + paramObj.searchText) : ""}&page=${paramObj.currentPage ? paramObj.currentPage : 1}${paramObj.sectionInfo.sectionId ? `&section=${paramObj.sectionInfo.sectionId}` : ''}`
-        console.log(assebledURL)
+        //console.log(assebledURL)
         const response = await axios.get(assebledURL)
         return response.data.response
     })
@@ -26,16 +26,16 @@ export const articlesSlice = createSlice({
         },
 
         incrementPage: (state) => {
-            console.log("attempting to increment the page")
+            //console.log("attempting to increment the page")
             if(state.currentPage < state.totalPages) {
                 state.currentPage++
             } else {
-                console.log("we have hit the bottom, what can i say")
+                //console.log("we have hit the bottom, what can i say")
             }
         },
 
         restoreArticlesState: state => {
-            console.log("restoring articles state")
+            //console.log("restoring articles state")
             state.currentPage = 1
             state.articlesData = []
             state.totalPages = undefined

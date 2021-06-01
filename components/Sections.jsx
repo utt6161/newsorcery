@@ -38,14 +38,14 @@ export default function Sections() {
 
     const serverSidePathName = useSelector(selectPathName) // for a server's info, servers will be null after first render of arcticles
     const clientSidePathName = useSelector(selectCurrentPath) // for a clients' info
-    console.log("serverSidePathName(sections): " + serverSidePathName)
-    console.log("clientSidePathName(sections): " + clientSidePathName)
+    //console.log("serverSidePathName(sections): " + serverSidePathName)
+    //("clientSidePathName(sections): " + clientSidePathName)
     let pathName = clientSidePathName !== "" && clientSidePathName!== undefined ? clientSidePathName : serverSidePathName
     switch(pathName){
     case "/":
         restoringHandler = (e)=> {
             //well, right now we at the main page
-            console.log("switched section")
+            //console.log("switched section")
             dispatch(restoreNewsState())
             dispatch(setSelected({
                 sectionId: Object.entries(sectionsList)[e.currentTarget.dataset.sectionid][0],
@@ -56,7 +56,7 @@ export default function Sections() {
     case "/search":
         restoringHandler = (e)=> {
             //well, right now we at the search page
-            console.log("switched section")
+            //console.log("switched section")
             dispatch(restoreArticlesState())
             dispatch(setSelected({
                 sectionId: Object.entries(sectionsList)[e.currentTarget.dataset.sectionid][0],
@@ -68,7 +68,7 @@ export default function Sections() {
     case "/article":
         restoringHandler = (e)=> {
             //well, right now we at the single article page
-            console.log("switched section")
+            //console.log("switched section")
             dispatch(setSelected({
                 sectionId: Object.entries(sectionsList)[e.currentTarget.dataset.sectionid][0],
                 sectionText: Object.entries(sectionsList)[e.currentTarget.dataset.sectionid][1],
@@ -92,7 +92,7 @@ export default function Sections() {
         currentButton = currentButton.filter((item) => item !== 'section-button-scrollable');
         currentButton.push('section-button-margin');
         setButton(currentButton);
-        console.log('onExpand fired');
+        //console.log('onExpand fired');
     };
 
     // shrink sections back
@@ -106,7 +106,7 @@ export default function Sections() {
         currentButton = currentButton.filter((item) => item !== 'section-button-margin');
         currentButton.push('section-button-scrollable');
         setButton(currentButton);
-        console.log('onShrink fired');
+        //console.log('onShrink fired');
     };
 
     const buttons = [];

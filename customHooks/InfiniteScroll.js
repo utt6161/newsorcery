@@ -29,7 +29,7 @@ export const useInfiniteScroll = (scrollRef, dispatch, reducer) => {
             new IntersectionObserver(entries => {
                 entries.forEach(en => {
                     if (en.intersectionRatio > 0) {
-                        console.log("HERE SHOULD BE A DISPATCH FOR INCREMENTING THE PAGE BROO")
+                        //console.log("HERE SHOULD BE A DISPATCH FOR INCREMENTING THE PAGE BROO")
                         dispatch(reducer());
                     }
                 });
@@ -39,7 +39,7 @@ export const useInfiniteScroll = (scrollRef, dispatch, reducer) => {
     );
 
     useEffect(() => {
-        console.log(scrollRef.current)
+        //console.log(scrollRef.current)
         if (scrollRef.current) {
             scrollObserver(scrollRef.current);
         }
@@ -47,34 +47,34 @@ export const useInfiniteScroll = (scrollRef, dispatch, reducer) => {
 }
 
 // lazy load images with intersection observer
-export const useLazyLoading = (imgSelector, items) => {
-    const imgObserver = useCallback(node => {
-        const intObs = new IntersectionObserver(entries => {
-            entries.forEach(en => {
-                if (en.intersectionRatio > 0) {
-                    const currentImg = en.target;
-                    const newImgSrc = currentImg.dataset.src;
-
-                    // only swap out the image source if the new url exists
-                    if (!newImgSrc) {
-                        console.error('Image source is invalid');
-                    } else {
-                        currentImg.src = newImgSrc;
-                    }
-                    intObs.unobserve(node);
-                }
-            });
-        })
-        intObs.observe(node);
-    }, []);
-
-    const imagesRef = useRef(null);
-
-    useEffect(() => {
-        imagesRef.current = document.querySelectorAll(imgSelector);
-
-        if (imagesRef.current) {
-            imagesRef.current.forEach(img => imgObserver(img));
-        }
-    }, [imgObserver, imagesRef, imgSelector, items])
-}
+// export const useLazyLoading = (imgSelector, items) => {
+//     const imgObserver = useCallback(node => {
+//         const intObs = new IntersectionObserver(entries => {
+//             entries.forEach(en => {
+//                 if (en.intersectionRatio > 0) {
+//                     const currentImg = en.target;
+//                     const newImgSrc = currentImg.dataset.src;
+//
+//                     // only swap out the image source if the new url exists
+//                     if (!newImgSrc) {
+//                         console.error('Image source is invalid');
+//                     } else {
+//                         currentImg.src = newImgSrc;
+//                     }
+//                     intObs.unobserve(node);
+//                 }
+//             });
+//         })
+//         intObs.observe(node);
+//     }, []);
+//
+//     const imagesRef = useRef(null);
+//
+//     useEffect(() => {
+//         imagesRef.current = document.querySelectorAll(imgSelector);
+//
+//         if (imagesRef.current) {
+//             imagesRef.current.forEach(img => imgObserver(img));
+//         }
+//     }, [imgObserver, imagesRef, imgSelector, items])
+// }

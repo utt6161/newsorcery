@@ -20,7 +20,7 @@ export const newsSlice = createSlice({
     reducers: {
 
         incrementPage: (state) => {
-            console.log("incrementing the page")
+            //console.log("incrementing the page")
             state.currentPage++
         },
 
@@ -55,7 +55,7 @@ export const newsSlice = createSlice({
     extraReducers: {
 
         [fetchNews.fulfilled]: (state, action) => {
-            console.log("now.. WHERE THE FUCK IS MY STATE????")
+            //console.log("now.. WHERE THE FUCK IS MY STATE????")
             let news = state.newsData !== undefined ? [...state.newsData, ...action.payload] : action.payload
             state.newsData = news
                 .filter((value, index, self) =>             // and after concat we make this array like a set, u n i q u e

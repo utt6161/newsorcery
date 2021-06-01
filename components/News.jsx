@@ -18,9 +18,9 @@ import {
 } from '../store/newsSlice';
 import {selectSectionInfo, selectSectionSelected} from '../store/sectionSlice';
 import NewsItem from './NewsItem';
-import {useFetch} from '../customHooks/customHooks'
+import {useFetch} from '../customHooks/InfiniteScroll'
 import {fetchNews} from "../store/newsSlice";
-import {useInfiniteScroll, useLazyLoading} from "../customHooks/customHooks"
+import {useInfiniteScroll, useLazyLoading} from "../customHooks/InfiniteScroll"
 import {nanoid} from "@reduxjs/toolkit";
 import {restoreArticlesState} from "../store/articlesSlice";
 // import InfiniteScroller from "./infinite_scroller"
@@ -42,7 +42,7 @@ const mapStateToProps = state => {
 
 export function News(props) {
 
-    console.log('News are rerendered');
+    //console.log('News are rerendered');
 
     // const isFetching = useSelector(selectIsFetching);
     // const isErrored = useSelector(state => state.isErrored);
@@ -68,7 +68,7 @@ export function News(props) {
     useEffect(() => {
         if (!skipNewsOnce.current) {
             let toRenderBuffer = []
-            console.log("news data from the component")
+            //console.log("news data from the component")
 
             for (let i in props.newsData) {
                 // if(i % 10 === 0) {
@@ -101,7 +101,7 @@ export function News(props) {
 
 
     useEffect(() => {
-        console.log("fetching news")
+        //console.log("fetching news")
         dispatch(fetchNews({
             currentPage: props.currentPage ?? 1,
             sectionSelected: props.sectionSelected ?? false,

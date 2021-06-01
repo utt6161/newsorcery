@@ -42,7 +42,7 @@ class NewsItem extends React.Component {
         return <a href={itemURL} style = {{ textDecoration: "none"}}>
             <div className="card mb-3 no-rounding full-border custom-card">
                 <img className="card-img-top no-rounding card-img-size" src={this.props.data.fields.thumbnail}
-                     alt="Card image cap"/>
+                    alt="Card image cap"/>
                 <div className="card-body">
                     <h5 className="card-title">{strip(this.props.data.fields.headline)}</h5>
                     <p className="card-text">{`${strip(this.props.data.fields.trailText)}...`}</p>

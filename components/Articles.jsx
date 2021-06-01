@@ -7,7 +7,7 @@ import {nanoid} from "@reduxjs/toolkit";
 import {ArticlesItem} from "./ArticlesItem";
 import {fetchArticles, incrementPage, restoreArticlesState, selectCurrentPage} from "../store/articlesSlice";
 import ReactPaginate from 'react-paginate';
-import {useInfiniteScroll} from "../customHooks/customHooks";
+import {useInfiniteScroll} from "../customHooks/InfiniteScroll";
 import {currentURL} from "../store/crucialData";
 import {restoreNewsState} from "../store/newsSlice";
 import {setServerStateClear} from "../store/serverSlice";
@@ -31,14 +31,15 @@ const mapStateToProps = state => {
 
 export function Articles(props) {
 
-    console.log('Articles are rerendered');
+    //console.log('Articles are rerendered');
+
     const dispatch = useDispatch();
     const [toRender, setToRender] = useState([])
     // console.log("urlSectionId: " + props.query.sectionId)
     // console.log("query.q: " + props.query.q)
     // const skippedFirstFecth = useRef(false)
     useEffect(() => {
-        console.log("fetching news")
+        //console.log("fetching news")
         let sectionIdToFetch
         if (props.sectionSelected || props.query.sectionId){
             // check for undefined might be redundant, but anyway, cant be too careful
@@ -58,7 +59,7 @@ export function Articles(props) {
             }
         }
         // if(skippedFirstFecth.current) {
-        console.log("params for a fetch. searchText: " + searchTextToFetch + " , sectionId: " + sectionIdToFetch)
+        // console.log("params for a fetch. searchText: " + searchTextToFetch + " , sectionId: " + sectionIdToFetch)
         dispatch(fetchArticles({
             currentPage: props.currentPage ?? 1,
             sectionSelected: props.sectionSelected ?? false,
@@ -81,7 +82,7 @@ export function Articles(props) {
 
     useEffect(() => {
         let toRenderBuffer = []
-        console.log("news data from the component")
+        //console.log("news data from the component")
 
         for (let i in props.articlesData) {
             toRenderBuffer.push(
