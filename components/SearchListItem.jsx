@@ -26,18 +26,18 @@ import {currentURL} from "../store/crucialData";
 // </Card>
 
 
-export function ArticlesItem(props) {
+export function SearchListItem(props) {
     const itemURL = `${currentURL}/article?&id=${encodeURIComponent(props.data.id)}`
 
 
     return(
 
-        <a href={itemURL} style = {{ textDecoration: "none"}}>
-            <div className="card full-border no-rounding m-2 p-2">
+        <a href={itemURL} style = {{ textDecoration: "none"}} className="article-item">
+            <div className="card full-border no-rounding m-2 p-2 bg-newspaper">
                 <div className="row">
                     <div className="col-md-4 my-auto">
                         <img src={props.data.fields.thumbnail}
-                            className="w-100 full-border"/>
+                            className="w-100 full-border card-img-search" alt="search image"/>
                     </div>
                     <div className="col-md-8 px-3 d-flex">
                         <div className="my-auto">

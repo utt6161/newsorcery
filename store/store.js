@@ -9,7 +9,6 @@ import {createWrapper} from "next-redux-wrapper";
 const rootReducer = combineReducers({
     server: serverReducer,
     section: sectionReducer,
-    news: newsReducer,
     search: searchReducer,
     articles: articlesReducer
 })

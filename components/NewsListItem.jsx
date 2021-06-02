@@ -3,7 +3,7 @@ import strip from "../utils/stripHtml";
 import {currentURL} from "../store/crucialData";
 
 
-class NewsItem extends React.Component {
+class NewsListItem extends React.Component {
 
     // let options = {
     //     era: 'long',
@@ -39,10 +39,10 @@ class NewsItem extends React.Component {
 
         const itemURL = `${currentURL}/article?&id=${encodeURIComponent(this.props.data.id)}`
 
-        return <a href={itemURL} style = {{ textDecoration: "none"}}>
-            <div className="card mb-3 no-rounding full-border custom-card">
-                <img className="card-img-top no-rounding card-img-size" src={this.props.data.fields.thumbnail}
-                    alt="Card image cap"/>
+        return <a href={itemURL} style = {{ textDecoration: "none"}} className="news-item">
+            <div className="card mb-3 no-rounding full-border custom-card bg-newspaper">
+                <img className="card-img-top no-rounding border-bottom border- card-img-news" src={this.props.data.fields.thumbnail}
+                     alt="Card image cap"/>
                 <div className="card-body">
                     <h5 className="card-title">{strip(this.props.data.fields.headline)}</h5>
                     <p className="card-text">{`${strip(this.props.data.fields.trailText)}...`}</p>
@@ -79,4 +79,4 @@ class NewsItem extends React.Component {
     }
 }
 
-export default NewsItem
+export default NewsListItem

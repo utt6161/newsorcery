@@ -57,7 +57,7 @@ export default function Article(props) {
             </Sections>
             <Row>
                 <Col>
-                    <div className="m-1 p-2 full-border" dangerouslySetInnerHTML={ contentToString() }/>
+                    <div className="m-1 p-2 full-border bg-white" dangerouslySetInnerHTML={ contentToString() }/>
                 </Col>
             </Row>
         </>

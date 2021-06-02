@@ -1,15 +1,14 @@
 import "bootstrap/dist/css/bootstrap.min.css"
 import "../styles/Global.css"
-
-import React, {useEffect, useRef, useState} from "react";
+import React, {useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {wrapper} from "../store/store"
 import {selectPathName, setPathAndQuery} from "../store/serverSlice";
 import Head from "next/head";
-import {Container, Form, FormControl, Navbar} from "react-bootstrap";
+import {Container, Navbar} from "react-bootstrap";
 import SectionButton from "../components/SectionButton";
 import {restoreNewsState} from "../store/newsSlice";
-import {selectSectionInfo, selectSectionSelected, setSelected, setUnselected} from "../store/sectionSlice";
+import {selectSectionInfo, selectSectionSelected, setUnselected} from "../store/sectionSlice";
 import Button from "react-bootstrap/Button";
 import {selectCurrentPath, selectSearchText, setCurrentPath, setSearchText} from "../store/searchSlice";
 import {currentURL, sectionsList} from "../store/crucialData";
@@ -37,7 +36,7 @@ function MyApp({ Component, pageProps, appProps }) {
         }
         setSearchInfo.current = false
     })
-    const searchLocation = `${currentURL}/search?&q=${search}${sectionSelected ? "&sectionId=" + sectionInfo.sectionId + "&sectionText=" + sectionInfo.sectionText : ""}`
+    const searchLocation = `${currentURL}/search?&q=${search}${sectionSelected ? "&sectionId=" + sectionInfo.sectionId : ""}`
 
     const onSearchHandler = (event) => {
         event.preventDefault()
@@ -111,7 +110,7 @@ function MyApp({ Component, pageProps, appProps }) {
                     crossOrigin="anonymous"/>
             </Head>
             <Container>
-                <Navbar id="navbar" expand="lg" className="mt-5" variant="light" bg="light">
+                <Navbar id="navbar" expand="lg" className="mt-5" variant="light">
                     <Navbar.Brand className="brand" href={currentURL}>NEWSorcery</Navbar.Brand>
                     <div className="d-flex w-100">
                         {sectionSelected &&

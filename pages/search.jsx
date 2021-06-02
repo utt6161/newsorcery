@@ -1,48 +1,34 @@
 import Sections from "../components/Sections";
-import {News} from "../components/News";
 import React, {useEffect, useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {selectQuery, setPathAndQuery} from "../store/serverSlice";
+import {selectQuery} from "../store/serverSlice";
 import {setSelected} from "../store/sectionSlice";
 import {setSearchText} from "../store/searchSlice";
-import ArticlesList from "../components/Articles";
-import {setCurrentPage, restoreArticlesState} from "../store/articlesSlice";
+import ArticlesList from "../components/SearchList";
 
 export default function Search(){
-
     const dispatch = useDispatch()
     const query = useSelector(selectQuery)
     const setSectionAndSearch = useRef(true)
     useEffect(()=>{
         if(setSectionAndSearch.current) {
-            if (query.hasOwnProperty("sectionId") && query.hasOwnProperty("sectionText")) {
-                //console.log("dispatched the section info from query")
+            if (query.hasOwnProperty("sectionId")) {
                 dispatch(setSelected({
-                    sectionId: ((query.sectionId !== "undefined") && (query.sectionId !== undefined)) ? query.sectionId : "",
-                    sectionText: ((query.sectionText !== "undefined") && (query.sectionText !== undefined))  ? query.sectionText: "",
+                    sectionId: query.sectionId,
                 }));
             }
-            //console.log("searchjs, query.q = " + query.q)
             if(query.hasOwnProperty("q")){
                 // IN CASE IF A QUERY PARAM IS EMPTY (like someurl.com?&q= ) THE QUERY GETS A STRING "undefined"
                 // i mean.. i get (partially) why its like that.. but still
                 if(query.q === "undefined" || query.q === "" || query.q === undefined){
-                    //console.log("setting search text to blank")
                     dispatch(setSearchText(""))
                 } else {
-                    //console.log("setting search text to data from query")
                     dispatch(setSearchText(query.q))
                 }
-
             }
-            // if(query.hasOwnProperty("page")){
-            //     dispatch(setCurrentPage(query.page ?? 1))
-            // }
             setSectionAndSearch.current = false
         }
     })
-
-
     return(
         <>
             <Sections/>

@@ -1,3 +1,7 @@
+html, body{
+    background-color: #f0ebdf;
+}
+
 /* @media (min-width: 34em) {
     .card-columns {
         -webkit-column-count: 1;
@@ -29,6 +33,52 @@
         column-count: 3;
     }
 } */
+/* news papers thing */
+
+.btn:hover{
+    color: black;
+    background-color: white;
+    border-color: black;
+}
+
+input:focus{
+    border-color: black !important;;
+    box-shadow: 0 0 0 0.2rem rgb(0 0 0 / 50%)!important;
+    background-color: #ffffff !important;
+}
+
+.btn-outline-primary{
+    border-color: black;
+    color: black;
+}
+.bg-newspaper{
+    background-color: #f0ebdf;
+}
+.news-item{
+    color: black;
+    transition: all 1s ease;
+}
+
+.news-item:hover{
+    color: black;
+}
+
+.news-item:hover img{
+    filter: none;
+}
+
+.article-item{
+    color: black;
+    transition: all 1s ease;
+}
+
+.article-item:hover{
+    color: black;
+}
+
+.article-item:hover img{
+    filter: none;
+}
 
 .go-up{
     display: block;
@@ -40,18 +90,23 @@
     /*font-size: 4vw;*/
     text-align: center;
     /*line-height: 15vw;*/
-    border: #1f8afe 2px solid;
-    background-color: #1f8afe;
+    border: black 2px solid;
+    background-color: #f0ebdf;
     position: absolute;
     bottom: 20px;
     right: 20px;
 }
+
+.go-up img{
+    filter: brightness(0) saturate(100%);
+}
+
 .go-up:hover{
     background-color: white;
 }
 
 .go-up:hover img{
-    filter: brightness(0) invert(39%) sepia(94%) saturate(1853%) hue-rotate(195deg) brightness(101%) contrast(99%);
+    filter: brightness(0) saturate(100%);
 }
 
 .arrow-up-img{
@@ -66,8 +121,7 @@
 }
 
 .card:hover {
-    background-color: #1f8afe;
-    color: white !important;
+    background-color: #ffffff;
 }
 
 .boundary-div-articles{
@@ -85,7 +139,7 @@
 }
 
 .full-border{
-    border: #1f8afe 1px solid;
+    border: black 1px solid;
 }
 
 .custom-card{
@@ -93,10 +147,14 @@
     margin: 0.5rem;
 }
 
-.card-img-size{
+.card-img-search{
+    filter: grayscale(100%);
+}
+
+.card-img-news{
+    filter: grayscale(100%);
     max-width: 20rem;
     height: auto;
-    padding: 1rem;
 }
 
 .no-rounding{
@@ -107,7 +165,19 @@
     height: 0.5rem;               /* ширина scrollbar */
 }
 .sections::-webkit-scrollbar-thumb {
-    background-color: #5aa9ff;    /* цвет плашки */
+    background-color: #2f2f2f;    /* цвет плашки */
+    border-radius: 0;       /* закругления плашки */
+    /*border: #1f8afe 4px solid;  !* padding вокруг плашки *!*/
+}
+
+
+body::-webkit-scrollbar {
+    background-color: white;
+    border-left: black 1px solid;
+    width: 0.5rem; /* ширина scrollbar */
+}
+body::-webkit-scrollbar-thumb {
+    background-color: #2f2f2f;    /* цвет плашки */
     border-radius: 0;       /* закругления плашки */
     /*border: #1f8afe 4px solid;  !* padding вокруг плашки *!*/
 }
@@ -120,14 +190,14 @@
 }
 
 .section-borders{
-    border-right: #1f8afe 1px solid;
-    border-left: #1f8afe 1px solid;
+    border-right: black 1px solid;
+    border-left: black 1px solid;
 }
 
 
 
 .colored-search{
-    border: #1f8afe 1px solid;
+    border: black 1px solid;
 }
 
 .scrollable-sections{
@@ -140,6 +210,24 @@
     border-radius: 0;
 }
 
+.selected-section-btn{
+    background-color: #2f2f2f;
+    color: white;
+    border-color: rgb(0, 0, 0);
+}
+
+.btn:focus{
+    color:white;
+    background-color: #2f2f2f !important;
+    border-color: black;
+    box-shadow: 0 0 0 0.2rem rgb(0 0 0 / 50%);
+}
+
+.selected-section-btn:active{
+    background-color: #2f2f2f !important;
+    border-color: black !important;
+}
+
 .selected-button{
     width: auto;
     height: calc(1.5em + .75rem + 2px);
@@ -148,6 +236,7 @@
 
 .selected-button:hover{
     background-color: #dc3545 !important;
+    color:white;
 }
 
 .selected-button:hover img{
@@ -156,7 +245,7 @@
 
 .cancel-image{
 
-    filter: invert(33%) sepia(78%) saturate(4183%) hue-rotate(201deg) brightness(105%) contrast(104%);
+    /*filter: invert(33%) sepia(78%) saturate(4183%) hue-rotate(201deg) brightness(105%) contrast(104%);*/
 }
 
 .selected-button-text{
@@ -223,7 +312,7 @@ img[class="gu-image"]{
 }
 
 .block{
-    border-bottom: #1f8afe 1px solid;
+    border-bottom: black 1px solid;
 }
 
 .updated-time{
@@ -237,7 +326,7 @@ img[class="gu-image"]{
 .brand{
     font-family: "Granite";
     font-size: 2rem!important;
-    color: #1f8afe!important;
+    color: black !important;
 }
 
 .info-button{

@@ -4,7 +4,6 @@ import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {sectionsList} from '../store/crucialData';
 import {selectSectionInfo, setSelected} from '../store/sectionSlice';
-import {restoreNewsState} from "../store/newsSlice";
 import {nanoid} from "@reduxjs/toolkit";
 import {selectPathName} from "../store/serverSlice";
 import {restoreArticlesState} from "../store/articlesSlice";
@@ -46,7 +45,7 @@ export default function Sections() {
         restoringHandler = (e)=> {
             //well, right now we at the main page
             //console.log("switched section")
-            dispatch(restoreNewsState())
+            dispatch(restoreArticlesState())
             dispatch(setSelected({
                 sectionId: Object.entries(sectionsList)[e.currentTarget.dataset.sectionid][0],
                 sectionText: Object.entries(sectionsList)[e.currentTarget.dataset.sectionid][1],
@@ -116,8 +115,7 @@ export default function Sections() {
                 buttons.push(
                     <Button
                         key={nanoid()}
-                        variant="primary"
-                        className={buttonClasses.join(' ')}
+                        className={buttonClasses.join(' ') + " selected-section-btn"}
                     >
                         <p className="section-text">{Object.entries(sectionsList)[i][1]}</p>
                     </Button>,
