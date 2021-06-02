@@ -41,7 +41,7 @@ class NewsListItem extends React.Component {
 
         return <a href={itemURL} style = {{ textDecoration: "none"}} className="news-item">
             <div className="card mb-3 no-rounding full-border custom-card bg-newspaper">
-                <img className="card-img-top no-rounding border-bottom border- card-img-news" src={this.props.data.fields.thumbnail}
+                <img className="card-img-top no-rounding border-bottom border-bottom border-dark card-img-news" src={this.props.data.fields.thumbnail}
                      alt="Card image cap"/>
                 <div className="card-body">
                     <h5 className="card-title">{strip(this.props.data.fields.headline)}</h5>
