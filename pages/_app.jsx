@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css"
 import "../styles/Global.css"
-import React, {useRef, useState} from "react";
+import React, {useRef, useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {wrapper} from "../store/store"
 import {selectOrigin, selectPathName, setPathAndQuery} from "../store/serverSlice";
@@ -13,6 +13,8 @@ import Button from "react-bootstrap/Button";
 import {selectCurrentPath, selectSearchText, setCurrentPath, setSearchText} from "../store/searchSlice";
 import {sectionsList} from "../store/crucialData";
 import {restoreArticlesState} from "../store/articlesSlice";
+import AnchorLink from 'react-anchor-link-smooth-scroll'
+import Fade from "react-bootstrap/Fade";
 
 
 function MyApp({ Component, pageProps, appProps }) {
@@ -31,7 +33,8 @@ function MyApp({ Component, pageProps, appProps }) {
     const sectionSelected = useSelector(selectSectionSelected)
     const sectionInfo = useSelector(selectSectionInfo)
     const setSearchInfo = useRef(true)
-    useState(()=>{
+    const [showAnchor, setShowAnchor] = useState(false);
+    useEffect(()=>{
         if(setSearchInfo.current) {
             dispatch(setCurrentPath(serverSidePathName))
         }
@@ -67,6 +70,20 @@ function MyApp({ Component, pageProps, appProps }) {
         break;
     }
 
+    let setScrollAnchorListener = useRef(true)
+    useEffect(()=>{
+        if(setScrollAnchorListener) {
+            window.addEventListener('scroll', (event) => {
+                let yOffset = window.pageYOffset
+                if (yOffset > 1200) {
+                    setShowAnchor(true)
+                } else {
+                    setShowAnchor(false)
+                }
+            })
+        }
+        setScrollAnchorListener = false
+    },)
 
     // tooltip thing, biohazard
     //         <Button className="ml-1 info_button d-none" variant="outline-primary" ref={target}
@@ -100,10 +117,8 @@ function MyApp({ Component, pageProps, appProps }) {
     // }, [sectionInfo, searchLocation])
 
     // <script defer src="https://platform.twitter.com/widgets.js" charSet="utf-8"/>
-    let homeUrl = origin
-    console.log(homeUrl)
     return (
-        <React.StrictMode>
+        <>
             <Head>
                 <title>NEWSorcery</title>
                 <meta name="description" content="Shmoll practice"/>
@@ -114,7 +129,7 @@ function MyApp({ Component, pageProps, appProps }) {
             </Head>
             <Container>
                 <Navbar id="navbar" expand="lg" className="mt-5" variant="light">
-                    <a className="navbar-brand brand" href="/">NEWSorcery</a>
+                    <a className="navbar-brand brand" id = "top" href="/">NEWSorcery</a>
                     <div className="d-flex w-100">
                         {sectionSelected &&
                         <SectionButton text={sectionInfo.sectionText} onClick={restoringHandler}>
@@ -134,12 +149,14 @@ function MyApp({ Component, pageProps, appProps }) {
 
                 <Component {...appProps} {...pageProps} />
                 <div className = "fixed-bottom">
-                    <a href="#" className="go-up">
-                        <img className="arrow-up-img" src="/arrow_up.png" alt="arrow up to top"/>
-                    </a>
+                    <Fade in={showAnchor}>
+                        <AnchorLink href='#top' className = "go-up">
+                            <img className="arrow-up-img" src="/arrow_up.png" alt="arrow up to top"/>
+                        </AnchorLink>
+                    </Fade>
                 </div>
             </Container>
-        </React.StrictMode>
+        </>
     )
 }
 

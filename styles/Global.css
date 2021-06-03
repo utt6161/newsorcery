@@ -80,33 +80,50 @@ input:focus{
     filter: none;
 }
 
+.twitter-tweet{
+    margin:auto;
+}
+
+.element-video{
+    align-items: center;
+}
+iframe[src*="youtube"]
+{
+    max-width:100%;
+    display: block !important;
+    margin: auto;
+}
+
 .go-up{
     display: block;
-    width: 4rem;
+    width: 3rem;
     height: 4rem;
-    border-radius: 50%;
+    /*border-radius: 50%;*/
     text-transform: uppercase;
     text-decoration: none;
     /*font-size: 4vw;*/
     text-align: center;
     /*line-height: 15vw;*/
-    border: black 2px solid;
-    background-color: #f0ebdf;
+    border: rgba(0, 0, 0, 0.53) 2px solid;
+    background-color: rgba(240, 235, 223, 0);
     position: absolute;
     bottom: 20px;
     right: 20px;
 }
 
 .go-up img{
+    opacity: 0.4;
     filter: brightness(0) saturate(100%);
 }
 
 .go-up:hover{
-    background-color: white;
+    background-color: black;
+
 }
 
 .go-up:hover img{
-    filter: brightness(0) saturate(100%);
+    opacity: 1;
+    filter: none
 }
 
 .arrow-up-img{
