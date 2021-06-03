@@ -8,8 +8,6 @@ import {SearchListItem} from "./SearchListItem";
 import {fetchSearchResults, incrementPage, restoreArticlesState, selectCurrentPage} from "../store/articlesSlice";
 import ReactPaginate from 'react-paginate';
 import {useInfiniteScroll} from "../customHooks/InfiniteScroll";
-import {currentURL} from "../store/crucialData";
-import {restoreNewsState} from "../store/newsSlice";
 import {setServerStateClear} from "../store/serverSlice";
 
 const checkIfEq = (left, right) => {

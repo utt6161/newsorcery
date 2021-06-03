@@ -4,7 +4,8 @@ import React from "react";
 import strip from "../utils/stripHtml";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import {currentURL} from "../store/crucialData";
+import {useSelector} from "react-redux";
+import {selectOrigin} from "../store/serverSlice";
 
 
 // <Card className = "w-100 full_border no_rounding m-2">
@@ -27,7 +28,8 @@ import {currentURL} from "../store/crucialData";
 
 
 export function SearchListItem(props) {
-    const itemURL = `${currentURL}/article?&id=${encodeURIComponent(props.data.id)}`
+    const origin = useSelector(selectOrigin)
+    const itemURL = `/article?&id=${encodeURIComponent(props.data.id)}`
 
 
     return(

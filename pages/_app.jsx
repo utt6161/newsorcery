@@ -3,7 +3,7 @@ import "../styles/Global.css"
 import React, {useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {wrapper} from "../store/store"
-import {selectPathName, setPathAndQuery} from "../store/serverSlice";
+import {selectOrigin, selectPathName, setPathAndQuery} from "../store/serverSlice";
 import Head from "next/head";
 import {Container, Navbar} from "react-bootstrap";
 import SectionButton from "../components/SectionButton";
@@ -11,7 +11,7 @@ import {restoreNewsState} from "../store/newsSlice";
 import {selectSectionInfo, selectSectionSelected, setUnselected} from "../store/sectionSlice";
 import Button from "react-bootstrap/Button";
 import {selectCurrentPath, selectSearchText, setCurrentPath, setSearchText} from "../store/searchSlice";
-import {currentURL, sectionsList} from "../store/crucialData";
+import {sectionsList} from "../store/crucialData";
 import {restoreArticlesState} from "../store/articlesSlice";
 
 
@@ -25,6 +25,7 @@ function MyApp({ Component, pageProps, appProps }) {
     const search = useSelector(selectSearchText)
     const serverSidePathName = useSelector(selectPathName) // for a server's info, servers will be null after first render of arcticles
     const clientSidePathName = useSelector(selectCurrentPath) // for a clients' info
+    const origin = useSelector(selectOrigin)
     //console.log("serverSidePathName(_appjs): " + serverSidePathName)
     //console.log("clientSidePathName(_appjs): " + clientSidePathName)
     const sectionSelected = useSelector(selectSectionSelected)
@@ -36,7 +37,7 @@ function MyApp({ Component, pageProps, appProps }) {
         }
         setSearchInfo.current = false
     })
-    const searchLocation = `${currentURL}/search?&q=${search}${sectionSelected ? "&sectionId=" + sectionInfo.sectionId : ""}`
+    const searchLocation = `/search?&q=${search}${sectionSelected ? "&sectionId=" + sectionInfo.sectionId : ""}`
 
     const onSearchHandler = (event) => {
         event.preventDefault()
@@ -48,7 +49,7 @@ function MyApp({ Component, pageProps, appProps }) {
     switch(pathName){
     case "/":
         restoringHandler = (e)=> {
-            dispatch(restoreNewsState());
+            dispatch(restoreArticlesState());
             dispatch(setUnselected())
         }
         break;
@@ -99,6 +100,8 @@ function MyApp({ Component, pageProps, appProps }) {
     // }, [sectionInfo, searchLocation])
 
     // <script defer src="https://platform.twitter.com/widgets.js" charSet="utf-8"/>
+    let homeUrl = origin
+    console.log(homeUrl)
     return (
         <React.StrictMode>
             <Head>
@@ -111,7 +114,7 @@ function MyApp({ Component, pageProps, appProps }) {
             </Head>
             <Container>
                 <Navbar id="navbar" expand="lg" className="mt-5" variant="light">
-                    <Navbar.Brand className="brand" href={currentURL}>NEWSorcery</Navbar.Brand>
+                    <a className="navbar-brand brand" href="/">NEWSorcery</a>
                     <div className="d-flex w-100">
                         {sectionSelected &&
                         <SectionButton text={sectionInfo.sectionText} onClick={restoringHandler}>
@@ -145,6 +148,7 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
         setPathAndQuery({
             pathName: ctx.pathname,
             query: ctx.query,
+            req: ctx.req.headers.origin,
         })
     );
     return {

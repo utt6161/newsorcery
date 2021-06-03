@@ -5,11 +5,12 @@ import {ParsedUrlQuery} from 'querystring';
 
 const serverSlice = createSlice({
     name: 'server',
-    initialState: {pathName: '', query: {}},
+    initialState: {pathName: '', req: '', query: {}},
     reducers: {
         setPathAndQuery(state, action) {
             state.pathName = action.payload.pathName ?? state.pathName;
             state.query = action.payload.query ?? state.query;
+            state.req = action.payload.req ?? state.req;
         },
         // setPath(state, action) {
         //     state.pathName = action.payload.pathName ?? state.pathName;
@@ -34,6 +35,7 @@ const serverSlice = createSlice({
 
 export const selectQuery = state => state.server.query
 export const selectPathName = state => state.server.pathName
+export const selectOrigin = state => state.server.req
 export default serverSlice.reducer;
 export {HYDRATE};
 export const {setPathAndQuery, setQuery, setPath, setServerStateClear} = serverSlice.actions;

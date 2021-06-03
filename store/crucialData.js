@@ -25,7 +25,7 @@ export const sectionsList = {
     world: "World news",
 };
 
-export const currentURL = process.env.NEXT_PUBLIC_SITE_URL
+// export const currentURL = location.origin
 
 export const apiKEY = process.env.NEXT_PUBLIC_API_KEY
 
