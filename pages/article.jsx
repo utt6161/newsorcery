@@ -19,15 +19,25 @@ export default function Article(props) {
     const query = useSelector(selectQuery)
     const [renderArticle, setArticleData] = useState("")
     useEffect(() => {
-        if (query.hasOwnProperty("id")) {
-            axios.get(`https://content.guardianapis.com/${decodeURIComponent(query.id)}?api-key=${apiKEY}&show-fields=headline,body`)
-                .then((response) => {
-                    setArticleData(response.data.response.content.fields.body)
-                })
-                .catch((reason)=>{
-                    setArticleData("<h1 style='color: #1f8afe' class = 'px-4 pt-4 text-center'>Seems like link to the article is broken</h1>" +
-                            "<h5 style='color: #1f8afe' class = 'text-center'>try again, perhaps?</h5>")
-                })
+        if (query.hasOwnProperty("id") && query.id !== "undefined") {
+            let articleId;
+            try{
+                articleId = decodeURIComponent(query.id)
+                axios.get(`https://content.guardianapis.com/${articleId}?api-key=${apiKEY}&show-fields=headline,body`)
+                    .then((response) => {
+                        setArticleData(response.data.response.content.fields.body)
+                    })
+                    .catch((reason)=>{
+                        setArticleData("<h1 class = 'px-4 pt-4 text-center'>Seems like link to the article is broken</h1>" +
+                            "<h5 class = 'text-center'>try again, perhaps?</h5>")
+                    })
+            }catch (e) {
+                setArticleData("<h1 class = 'px-4 pt-4 text-center'>Seems like link to the article is broken</h1>" +
+                    "<h5 class = 'text-center'>try again, perhaps?</h5>")
+            }
+        } else {
+            setArticleData("<h1 class = 'px-4 pt-4 text-center'>Seems like link to the article is broken</h1>" +
+                "<h5 class = 'text-center'>try again, perhaps?</h5>")
         }
     }, [renderArticle])
 

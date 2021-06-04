@@ -5,12 +5,14 @@ import serverReducer from "./serverSlice"
 import searchReducer from "./searchSlice"
 import articlesReducer from "./articlesSlice"
 import {createWrapper} from "next-redux-wrapper";
+import switchReducer from "./switchSlice";
 
 const rootReducer = combineReducers({
     server: serverReducer,
     section: sectionReducer,
     search: searchReducer,
-    articles: articlesReducer
+    articles: articlesReducer,
+    switch: switchReducer
 })
 
 export const makeStore = () => {

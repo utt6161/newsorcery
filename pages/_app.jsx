@@ -7,15 +7,17 @@ import {selectOrigin, selectPathName, setPathAndQuery} from "../store/serverSlic
 import Head from "next/head";
 import {Container, Navbar} from "react-bootstrap";
 import SectionButton from "../components/SectionButton";
-import {restoreNewsState} from "../store/newsSlice";
 import {selectSectionInfo, selectSectionSelected, setUnselected} from "../store/sectionSlice";
 import Button from "react-bootstrap/Button";
 import {selectCurrentPath, selectSearchText, setCurrentPath, setSearchText} from "../store/searchSlice";
-import {sectionsList} from "../store/crucialData";
 import {restoreArticlesState} from "../store/articlesSlice";
 import AnchorLink from 'react-anchor-link-smooth-scroll'
 import Fade from "react-bootstrap/Fade";
-
+import SettingsIcon from "../components/SettingsIcon";
+import Modal from "react-bootstrap/Modal";
+import Switch from "../components/Switch";
+import {selectSwitch, setSwitch, toggleSwitch} from "../store/switchSlice";
+import Cookies from "js-cookie/src/js.cookie"
 
 function MyApp({ Component, pageProps, appProps }) {
 
@@ -24,16 +26,25 @@ function MyApp({ Component, pageProps, appProps }) {
     // const target = useRef(null);
 
     const dispatch = useDispatch()
+    const settingsSwitch = useSelector(selectSwitch)
+    const cookiesSettingsSwitch = Cookies.get("switch")
+    useEffect(()=>{
+        if( (settingsSwitch.toString() !== cookiesSettingsSwitch) && cookiesSettingsSwitch !== undefined ){
+            dispatch(toggleSwitch())
+        }
+    })
+
+
     const search = useSelector(selectSearchText)
-    const serverSidePathName = useSelector(selectPathName) // for a server's info, servers will be null after first render of arcticles
+    const serverSidePathName = useSelector(selectPathName) // for a server's info, servers will be null after first render of articles
     const clientSidePathName = useSelector(selectCurrentPath) // for a clients' info
-    const origin = useSelector(selectOrigin)
     //console.log("serverSidePathName(_appjs): " + serverSidePathName)
     //console.log("clientSidePathName(_appjs): " + clientSidePathName)
     const sectionSelected = useSelector(selectSectionSelected)
     const sectionInfo = useSelector(selectSectionInfo)
     const setSearchInfo = useRef(true)
     const [showAnchor, setShowAnchor] = useState(false);
+    const [modalShow, setModalShow] = useState(false); // for a modal with settings
     useEffect(()=>{
         if(setSearchInfo.current) {
             dispatch(setCurrentPath(serverSidePathName))
@@ -47,6 +58,9 @@ function MyApp({ Component, pageProps, appProps }) {
         window.location = searchLocation
     }
 
+    // const [isNotEvenRows, setRows] = useState(true)
+
+    const [showSettings, setShowSettings] = useState(false) // for a settings button
     let restoringHandler;
     let pathName = clientSidePathName !== "" && clientSidePathName!== undefined ? clientSidePathName : serverSidePathName
     switch(pathName){
@@ -55,6 +69,9 @@ function MyApp({ Component, pageProps, appProps }) {
             dispatch(restoreArticlesState());
             dispatch(setUnselected())
         }
+        useEffect(()=>{
+            setShowSettings(true)
+        },[showSettings])
         break;
     case "/search":
         restoringHandler = (e)=> {
@@ -84,7 +101,6 @@ function MyApp({ Component, pageProps, appProps }) {
         }
         setScrollAnchorListener = false
     },)
-
     // tooltip thing, biohazard
     //         <Button className="ml-1 info_button d-none" variant="outline-primary" ref={target}
     //     onClick={() => setShow(!show)}>
@@ -99,23 +115,6 @@ function MyApp({ Component, pageProps, appProps }) {
     //             </Tooltip>
     //         )}
     //     </Overlay>
-
-    // <FormControl
-    //     className="squared colored-search"
-    //     as = "input"
-    //     placeholder="Search"
-    //     aria-label="Search"
-    //     onChange = {(e) => {dispatch(setSearchText(e.target.value))}}
-    //     value = {search}
-    //     onKeyUp = {(e) => {onSearchHandler}}
-    // />
-
-    // const [enterHandler, setEnterHandler] = useState()
-    // useEffect(()=>{
-    //     setEnterHandler(
-    //     })
-    // }, [sectionInfo, searchLocation])
-
     // <script defer src="https://platform.twitter.com/widgets.js" charSet="utf-8"/>
     return (
         <>
@@ -123,9 +122,13 @@ function MyApp({ Component, pageProps, appProps }) {
                 <title>NEWSorcery</title>
                 <meta name="description" content="Shmoll practice"/>
 
-                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+                <link rel="stylesheet" href={"https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"}
                     integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
                     crossOrigin="anonymous"/>
+                <link rel="apple-touch-icon" sizes="180x180" href={"/apple-touch-icon.png"}/>
+                <link rel="icon" type="image/png" sizes="32x32" href={"/favicon-32x32.png"}/>
+                <link rel="icon" type="image/png" sizes="16x16" href={"/favicon-16x16.png"}/>
+                <link rel="manifest" href={"/site.webmanifest"}/>
             </Head>
             <Container>
                 <Navbar id="navbar" expand="lg" className="mt-5" variant="light">
@@ -142,7 +145,33 @@ function MyApp({ Component, pageProps, appProps }) {
                                     window.location = searchLocation
                                 }}}/>
                         <Button className="squared ml-1" onClick = {onSearchHandler} variant="outline-primary">Search</Button>
+                        {showSettings &&
+                            <>
+                            <Button className="squared settings-button ml-1 px-2 py-0" onClick = {() => setModalShow(true)} variant="outline-primary">
+                                <SettingsIcon className = "settings-gear"/>
+                            </Button>
+                            <Modal
+                                show={modalShow}
+                                onHide={() => setModalShow(false)}
+                                size="lg"
+                                aria-labelledby="contained-modal-title-vcenter"
+                                centered >
+                                <Modal.Header closeButton>
+                                    <Modal.Title>Settings</Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                    <div className="d-flex">
+                                        <span className = "align-self-center"style = {{fontSize: "1.3rem"}}>Rows aren't even in height: </span>
+                                        <div className="d-inline-block ml-2" style = {{verticalAlign: "middle"}}>
+                                            <Switch
+                                                isOn={settingsSwitch}
+                                                handleObject={{dispatcher: dispatch, reducer: setSwitch}}/>
+                                        </div>
+                                    </div>
+                                </Modal.Body>
+                            </Modal>
 
+                            </>}
                     </div>
 
                 </Navbar>
@@ -151,7 +180,17 @@ function MyApp({ Component, pageProps, appProps }) {
                 <div className = "fixed-bottom">
                     <Fade in={showAnchor}>
                         <AnchorLink href='#top' className = "go-up">
-                            <img className="arrow-up-img" src="/arrow_up.png" alt="arrow up to top"/>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                x="0"
+                                y="0"
+                                enableBackground="new 0 0 240.835 240.835"
+                                version="1.1"
+                                viewBox="0 0 240.835 240.835"
+                                xmlSpace="preserve"
+                            >
+                                <path d="M129.007 57.819c-4.68-4.68-12.499-4.68-17.191 0L3.555 165.803c-4.74 4.74-4.74 12.427 0 17.155 4.74 4.74 12.439 4.74 17.179 0l99.683-99.406 99.671 99.418c4.752 4.74 12.439 4.74 17.191 0 4.74-4.74 4.74-12.427 0-17.155L129.007 57.819z"/>
+                            </svg>
                         </AnchorLink>
                     </Fade>
                 </div>
@@ -165,7 +204,7 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
         setPathAndQuery({
             pathName: ctx.pathname,
             query: ctx.query,
-            req: ctx.req.headers.origin,
+            req: ctx.req.headers.origin
         })
     );
     return {

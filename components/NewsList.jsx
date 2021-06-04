@@ -1,12 +1,13 @@
-import {connect, useDispatch} from 'react-redux';
+import {connect, useDispatch, useSelector} from 'react-redux';
 import React, {
     useEffect, useRef, useState
 } from 'react';
-import {Masonry} from 'react-masonry-responsive';
+import {Masonry} from "./Masonry"
 import NewsListItem from './NewsListItem';
 import {fetchNews, incrementPage} from "../store/articlesSlice";
 import {useInfiniteScroll} from "../customHooks/InfiniteScroll"
 import {nanoid} from "@reduxjs/toolkit";
+import {selectSwitch} from "../store/switchSlice";
 
 // const checkIfEq = (left, right) => {
 //     return JSON.stringify(left) !== JSON.stringify(right)
@@ -33,6 +34,7 @@ export function NewsList(props) {
     const dispatch = useDispatch();
     const [toRender, setToRender] = useState([])
     const skipNewsOnce = useRef(true);
+    const settingsSwitch = useSelector(selectSwitch)
     // const skipSectionOnce = useRef(true)
     let bottomBoundaryRef = useRef(null)
 
@@ -80,6 +82,7 @@ export function NewsList(props) {
             <Masonry
                 items={toRender}
                 gap={16}
+                equalHeight = {!settingsSwitch}
                 minColumnWidth={254}
             />
             <div id='page-bottom-boundary' className="boundary-div-news" ref={bottomBoundaryRef}/>

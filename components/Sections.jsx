@@ -171,14 +171,34 @@ export default function Sections() {
                 >
                     {!expanded && (
                         <>
-                            <p className="ml-2 expand-button-text">⮮</p>
-                            <p className="mr-2 expand-button-text">⮯</p>
+                            <p className="ml-2 expand-button-text">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15.5 7L12 10.5L8.5 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                    <path d="M15.5 13L12 16.5L8.5 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                            </p>
+                            <p className="mr-2 expand-button-text">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15.5 7L12 10.5L8.5 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                    <path d="M15.5 13L12 16.5L8.5 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                            </p>
                         </>
                     )}
                     {expanded && (
                         <>
-                            <p className="ml-2 expand-button-text">⮬</p>
-                            <p className="mr-2 expand-button-text">⮭</p>
+                            <p className="ml-2 expand-button-text">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15.5 16.5L12 13L8.5 16.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                    <path d="M15.5 10.5L12 7L8.5 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                            </p>
+                            <p className="mr-2 expand-button-text">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15.5 16.5L12 13L8.5 16.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                    <path d="M15.5 10.5L12 7L8.5 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                            </p>
                         </>
                     )}
                 </Button>

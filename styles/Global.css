@@ -46,7 +46,6 @@ input:focus{
     box-shadow: 0 0 0 0.2rem rgb(0 0 0 / 50%)!important;
     background-color: #ffffff !important;
 }
-
 .btn-outline-primary{
     border-color: black;
     color: black;
@@ -111,27 +110,72 @@ iframe[src*="youtube"]
     right: 20px;
 }
 
-.go-up img{
+.go-up svg{
+    width: 2rem;
+    height: 2.5rem;
+    margin-top: 0.6rem;
     opacity: 0.4;
-    filter: brightness(0) saturate(100%);
+    fill: black
 }
 
 .go-up:hover{
     background-color: black;
-
 }
 
-.go-up:hover img{
+.react-switch-checkbox {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+
+.react-switch-label {
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    width: 80px;
+    height: 30px;
+    background: grey;
+    border-radius: 100px;
+    position: relative;
+    transition: background-color .2s;
+}
+
+.react-switch-label .react-switch-button {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 25px;
+    height: 25px;
+    border-radius: 45px;
+    transition: 0.2s;
+    background: #fff;
+    box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
+}
+
+.react-switch-checkbox:checked + .react-switch-label .react-switch-button {
+    left: calc(100% - 2px);
+    transform: translateX(-100%);
+}
+
+.react-switch-label:active .react-switch-button {
+    width: 45px;
+}
+
+
+
+
+.go-up:hover svg{
     opacity: 1;
-    filter: none
+    fill: white
 }
 
-.arrow-up-img{
-    width: 2rem;
-    height: 2.5rem;
-    margin-top: 0.6rem;
+/*.arrow-up-img{*/
+/*    width: 2rem;*/
+/*    height: 2.5rem;*/
+/*    margin-top: 0.6rem;*/
 
-}
+/*}*/
 
 .card{
     transition: 0.2s ease-out;
@@ -310,6 +354,15 @@ body::-webkit-scrollbar-thumb {
     border-radius: 0;
 }
 
+.settings-gear{
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.settings-button:focus{
+    background-color: white!important;
+}
+
 .expand-button{
     width: 100%;
     height: 1.5rem;
@@ -319,6 +372,8 @@ body::-webkit-scrollbar-thumb {
 }
 .expand-button-text{
     margin: 0;
+    width: 2rem;
+    height: 2rem;
 }
 img[class="gu-image"]{
     max-width: 1000px;
