@@ -1,22 +1,22 @@
 import "bootstrap/dist/css/bootstrap.min.css"
-import "../styles/Global.css"
+import "../src/styles/Global.css"
 import React, {useRef, useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {wrapper} from "../store/store"
-import {selectOrigin, selectPathName, setPathAndQuery} from "../store/serverSlice";
+import {wrapper} from "../src/store/store"
+import {selectOrigin, selectPathName, setPathAndQuery} from "../src/store/serverSlice";
 import Head from "next/head";
 import {Container, Navbar} from "react-bootstrap";
-import SectionButton from "../components/SectionButton";
-import {selectSectionInfo, selectSectionSelected, setUnselected} from "../store/sectionSlice";
+import SectionButton from "../src/components/SectionButton";
+import {selectSectionInfo, selectSectionSelected, setUnselected} from "../src/store/sectionSlice";
 import Button from "react-bootstrap/Button";
-import {selectCurrentPath, selectSearchText, setCurrentPath, setSearchText} from "../store/searchSlice";
-import {restoreArticlesState} from "../store/articlesSlice";
+import {selectCurrentPath, selectSearchText, setCurrentPath, setSearchText} from "../src/store/searchSlice";
+import {restoreArticlesState} from "../src/store/articlesSlice";
 import AnchorLink from 'react-anchor-link-smooth-scroll'
 import Fade from "react-bootstrap/Fade";
-import SettingsIcon from "../components/SettingsIcon";
+import SettingsIcon from "../src/components/SettingsIcon";
 import Modal from "react-bootstrap/Modal";
-import Switch from "../components/Switch";
-import {selectSwitch, setSwitch, toggleSwitch} from "../store/switchSlice";
+import Switch from "../src/components/Switch";
+import {selectSwitch, setSwitch, toggleSwitch} from "../src/store/switchSlice";
 import Cookies from "js-cookie/src/js.cookie"
 
 function MyApp({ Component, pageProps, appProps }) {
@@ -132,22 +132,22 @@ function MyApp({ Component, pageProps, appProps }) {
             </Head>
             <Container>
                 <Navbar id="navbar" expand="lg" className="mt-5" variant="light">
-                    <a className="navbar-brand brand" id = "top" href="/">NEWSorcery</a>
+                    <a data-cy = "brand-link" className="navbar-brand brand" id = "top" href="/">NEWSorcery</a>
                     <div className="d-flex w-100">
                         {sectionSelected &&
                         <SectionButton text={sectionInfo.sectionText} onClick={restoringHandler}>
 
                         </SectionButton>
                         }
-                        <input placeholder="Search" aria-label="Search" value={search} onChange = {(e) => {dispatch(setSearchText(e.target.value))}}
+                        <input data-cy = "search-input" placeholder="Search" aria-label="Search" value={search} onChange = {(e) => {dispatch(setSearchText(e.target.value))}}
                             className="squared colored-search form-control" onKeyUp={({key}) =>{
                                 if (key === "Enter") {
                                     window.location = searchLocation
                                 }}}/>
-                        <Button className="squared ml-1" onClick = {onSearchHandler} variant="outline-primary">Search</Button>
+                        <Button data-cy = "search-btn" className="squared ml-1" onClick = {onSearchHandler} variant="outline-primary">Search</Button>
                         {showSettings &&
                             <>
-                            <Button className="squared settings-button ml-1 px-2 py-0" onClick = {() => setModalShow(true)} variant="outline-primary">
+                            <Button data-cy = "settings-btn" className="squared settings-button ml-1 px-2 py-0" onClick = {() => setModalShow(true)} variant="outline-primary">
                                 <SettingsIcon className = "settings-gear"/>
                             </Button>
                             <Modal
@@ -161,7 +161,7 @@ function MyApp({ Component, pageProps, appProps }) {
                                 </Modal.Header>
                                 <Modal.Body>
                                     <div className="d-flex">
-                                        <span className = "align-self-center"style = {{fontSize: "1.3rem"}}>Rows aren't even in height: </span>
+                                        <span className = "align-self-center" style = {{fontSize: "1.3rem"}}>Rows aren't even in height: </span>
                                         <div className="d-inline-block ml-2" style = {{verticalAlign: "middle"}}>
                                             <Switch
                                                 isOn={settingsSwitch}
@@ -216,6 +216,11 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
         appProps: { appInitialProcessEnv: process.env.APP_PROP },
     };
 };
+
+//
+// if(process.browser){
+//     window.store = wrapper.withRedux()
+// }
 
 export default wrapper.withRedux(MyApp);
 

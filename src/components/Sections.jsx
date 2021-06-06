@@ -153,7 +153,7 @@ export default function Sections() {
     return (
         <>
             <Row>
-                <div className={sectionClasses.join(' ')} id="sections">
+                <div data-cy="sections-div" className={sectionClasses.join(' ')} id="sections">
                     {buttons}
                 </div>
             </Row>

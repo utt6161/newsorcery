@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run --browser chrome"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.1",
@@ -29,10 +31,17 @@
     "redux-devtools-extension": "^2.13.9"
   },
   "devDependencies": {
+    "@cypress/code-coverage": "^3.9.6",
+    "@cypress/react": "^5.9.1",
+    "@cypress/webpack-dev-server": "^1.3.1",
+    "babel-plugin-istanbul": "^6.0.0",
+    "cypress": "^7.4.0",
+    "debug": "^4.3.1",
     "eslint": "^7.27.0",
     "eslint-plugin-import": "^2.23.3",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.23.2",
-    "eslint-plugin-react-hooks": "^4.2.0"
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "jest": "^27.0.4"
   }
 }

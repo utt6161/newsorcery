@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function SectionButton(props){
 
     return(
-        <Button variant="outline-primary d-flex align-items-center"
+        <Button data-cy = "section-btn" variant="outline-primary d-flex align-items-center"
                 className="section-button selected-button" onClick={props.onClick}>
             <p className="selected-button-text">{props.text}</p>
             <div className = "mr-1 d-flex">

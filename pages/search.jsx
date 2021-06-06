@@ -1,10 +1,10 @@
-import Sections from "../components/Sections";
+import Sections from "../src/components/Sections";
 import React, {useEffect, useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {selectQuery} from "../store/serverSlice";
-import {setSelected} from "../store/sectionSlice";
-import {setSearchText} from "../store/searchSlice";
-import ArticlesList from "../components/SearchList";
+import {selectQuery} from "../src/store/serverSlice";
+import {setSelected} from "../src/store/sectionSlice";
+import {setSearchText} from "../src/store/searchSlice";
+import ArticlesList from "../src/components/SearchList";
 
 export default function Search(){
     const dispatch = useDispatch()

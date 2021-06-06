@@ -1,5 +1,5 @@
 import React from "react";
-import Sections from "../components/Sections";
+import Sections from "../src/components/Sections";
 
 
 export default function Custom505() {

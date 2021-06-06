@@ -1,17 +1,17 @@
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import React, {useEffect, useRef, useState} from "react";
-import strip from "../utils/stripHtml";
+import strip from "../src/utils/stripHtml";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import {useDispatch, useSelector} from "react-redux";
-import {selectQuery} from "../store/serverSlice";
-import {setSelected} from "../store/sectionSlice";
-import {setSearchText} from "../store/searchSlice";
-import {setCurrentPage} from "../store/articlesSlice";
-import Sections from "../components/Sections";
+import {selectQuery} from "../src/store/serverSlice";
+import {setSelected} from "../src/store/sectionSlice";
+import {setSearchText} from "../src/store/searchSlice";
+import {setCurrentPage} from "../src/store/articlesSlice";
+import Sections from "../src/components/Sections";
 import axios from "axios";
-import {apiKEY} from "../store/crucialData";
+import {apiKEY} from "../src/store/crucialData";
 
 export default function Article(props) {
 
