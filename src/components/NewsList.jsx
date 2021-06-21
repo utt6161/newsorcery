@@ -85,9 +85,11 @@ export function NewsList(props) {
                 equalHeight = {!settingsSwitch}
                 minColumnWidth={254}
             />
-            <div id='page-bottom-boundary' className="boundary-div-news" ref={bottomBoundaryRef}/>
+            <div data-cy = "infinitescroll-boundary" id='page-bottom-boundary' className="boundary-div-news" ref={bottomBoundaryRef}/>
         </>
     );
 }
+
+export const TestNewsList = NewsList
 
 export default connect(mapStateToProps)(NewsList)

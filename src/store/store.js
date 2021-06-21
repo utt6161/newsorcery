@@ -15,6 +15,10 @@ const rootReducer = combineReducers({
     switch: switchReducer
 })
 
+export const testStore = configureStore({
+    reducer: rootReducer
+});
+
 export const makeStore = () => {
     const store = configureStore({
         reducer: rootReducer

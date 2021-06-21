@@ -6,6 +6,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import {useSelector} from "react-redux";
 import {selectOrigin} from "../store/serverSlice";
+import {ImageWrapper} from "./ImageWrapper";
 
 
 // <Card className = "w-100 full_border no_rounding m-2">
@@ -38,7 +39,7 @@ export function SearchListItem(props) {
             <div className="card full-border no-rounding m-2 p-2 bg-newspaper">
                 <div className="row">
                     <div className="col-md-4 my-auto">
-                        <img src={props.data.fields.thumbnail}
+                        <ImageWrapper src={props.data.fields.thumbnail}
                             className="w-100 full-border card-img-search" alt="search image"/>
                     </div>
                     <div className="col-md-8 px-3 d-flex">
