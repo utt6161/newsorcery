@@ -4,6 +4,7 @@ const Switch = ({ isOn, handleObject }) => {
     return (
         <>
             <input
+                data-cy = "settings-switch"
                 checked={isOn}
                 onChange={() => {
                     handleObject.dispatcher(handleObject.reducer(!isOn))

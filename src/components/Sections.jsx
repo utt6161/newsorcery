@@ -166,6 +166,7 @@ export default function Sections() {
             <Row>
                 <Button
                     onClick={expandHandler}
+                    data-cy = "expand-btn"
                     className="expand-button d-flex justify-content-between align-items-center"
                     variant="outline-primary"
                 >

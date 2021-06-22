@@ -179,7 +179,7 @@ function MyApp({ Component, pageProps, appProps }) {
                 <Component {...appProps} {...pageProps} />
                 <div className = "fixed-bottom">
                     <Fade in={showAnchor}>
-                        <AnchorLink href='#top' className = "go-up">
+                        <AnchorLink data-cy = "anchor-btn" href='#top' className = "go-up">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 x="0"

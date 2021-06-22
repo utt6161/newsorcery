@@ -16,3 +16,14 @@ And then just
 ```bash
 npm run dev
 ```
+If you want to run tests
+
+component testing:
+```bash
+yarn cypress open-ct 
+```
+
+integration tests:
+```bash
+npm run cypress:open
+```
