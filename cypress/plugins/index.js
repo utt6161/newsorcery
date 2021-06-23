@@ -43,7 +43,6 @@ module.exports = (on, config) => {
     });
   });
   config.env.reactDevtools = true;
-  return config;
 
   if (config.testingType === "component") {
     injectDevServer(on, config);

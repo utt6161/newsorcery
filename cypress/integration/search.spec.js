@@ -61,7 +61,7 @@ context("search page",()=>{
         cy.wait(500)
     })
 
-    it.only("check for url params",()=>{
+    it("check for url params",()=>{
         // searching for an apple
         cy.visit(Cypress.config().baseUrl + "search?&q=apple")
         cy.wait(2000)
