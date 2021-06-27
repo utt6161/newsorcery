@@ -157,7 +157,7 @@ function MyApp({ Component, pageProps, appProps }) {
                                 aria-labelledby="contained-modal-title-vcenter"
                                 centered >
                                 <Modal.Header closeButton>
-                                    <Modal.Title>Settings</Modal.Title>
+                                    <Modal.Title>Settings (still unstable, sry)</Modal.Title>
                                 </Modal.Header>
                                 <Modal.Body>
                                     <div className="d-flex">

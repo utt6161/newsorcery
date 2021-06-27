@@ -31,4 +31,4 @@ npm run cypress:open
 23.06.2021 note: 
 cypress component testing is a f*cking mess, workarounds around workarounds\
 like wtf... i get that it's still in development and so on, but still :^)\
-So no tests like that for now. Wanted to try out jest but... idk, it feels weird to me
+So not tests like that for now. Wanted to try out jest but... idk, it feels weird to me
